@@ -1,0 +1,21 @@
+.btn {
+
+}
+
+.link {
+  font-size: 14px;
+  padding: 0 15px;
+  background-color: transparent;
+  border: 0;
+  transition: opacity .3s cubic-bezier(.645, .045, .355, 1);
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+    color: currentColor;
+  }
+
+  &--white {
+    color: #fff;
+  }
+}

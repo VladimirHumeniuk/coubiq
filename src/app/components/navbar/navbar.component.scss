@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  color: #fff;
+  font-family: var(--f-montserat);
+  font-weight: 800;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.header-nav__btn {
+  &.btn {
+    display: flex;
+    align-items: center;
+    color: #4a8bfc;
+  }
+}

@@ -1,0 +1,23 @@
+:host ::ng-deep {
+  .ant-layout {
+    height: 100%;
+  }
+
+  .ant-layout-header {
+    background: linear-gradient(to right, #347eff, #1ea3ff);
+    color: #fff;
+  }
+
+  .ant-layout-content {
+    background-color: #fff;
+  }
+
+  .ant-layout-content {
+    background-color: #fff;
+  }
+
+  .ant-layout-footer,
+  .ant-layout-sider {
+    background-color: #f9fafb;
+  }
+}

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // Routing
@@ -9,6 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Core module
 import { AppComponent } from './app.component';
+
+// Firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 // 3rd party modules
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -34,9 +40,13 @@ import { RegistrationService } from './shared/services/registration.service';
     AppRoutingModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule.forRoot()
+    NgZorroAntdModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [RegistrationService],
   bootstrap: [AppComponent]

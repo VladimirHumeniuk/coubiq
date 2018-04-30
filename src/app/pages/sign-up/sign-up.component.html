@@ -1,3 +1,71 @@
-<p>
-  sign-up works!
-</p>
+<form
+[formGroup]="registration"
+(submit)="regService.onSubmit(registration)"
+nz-form>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <input
+        type="text"
+        nz-input
+        formControlName="username"
+        placeholder="Имя">
+      </nz-input-group>
+      <nz-form-explain></nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <input
+        type="email"
+        nz-input
+        formControlName="email"
+        placeholder="Эл.адрес">
+      </nz-input-group>
+      <nz-form-explain></nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <input
+        type="password"
+        nz-input
+        formControlName="password"
+        placeholder="Пароль">
+      </nz-input-group>
+      <nz-form-explain></nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-select
+      style="width: 200px;"
+      nzShowSearch
+      nzNotFoundContent="Нет результатов"
+      formControlName="country"
+      nzPlaceHolder="Страна">
+        <nz-option nzLabel="Украина" nzValue="Ukraine"></nz-option>
+        <nz-option nzLabel="Россия" nzValue="Russia"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-select
+  style="width: 200px;"
+  nzShowSearch
+  nzNotFoundContent="Нет результатов"
+  formControlName="city"
+  nzPlaceHolder="Город">
+    <nz-option nzLabel="Киев" nzValue="Kyiv"></nz-option>
+    <nz-option nzLabel="Харьков" nzValue="Kharkiv"></nz-option>
+  </nz-select>
+
+  <button nz-button [nzType]="'primary'" type="submit">Sumbit</button>
+
+</form>

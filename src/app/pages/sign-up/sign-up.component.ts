@@ -10,6 +10,7 @@ import { RegistrationService } from "../../shared/services/registration.service"
 })
 export class SignUpComponent implements OnInit {
 
+  public background: string = '../../../assets/images/bg_sign-in.png';
   public registration: FormGroup;
 
   constructor(
@@ -22,8 +23,8 @@ export class SignUpComponent implements OnInit {
       username: [''],
       email: [''],
       password: [''],
-      country: [''],
-      city: ['']
+      country: [],
+      city: []
     })
   }
 

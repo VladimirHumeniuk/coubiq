@@ -1,71 +1,112 @@
-<form
-[formGroup]="registration"
-(submit)="regService.onSubmit(registration)"
-nz-form>
+<div nz-row class="form-screaner">
+  <!-- Forn -->
+  <div nz-col nzSpan="17" class="form-screaner__form">
+    <div class="form-screaner__form-container">
 
-  <nz-form-item>
-    <nz-form-control>
-      <nz-input-group>
-        <input
-        type="text"
-        nz-input
-        formControlName="username"
-        placeholder="Имя">
-      </nz-input-group>
-      <nz-form-explain></nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      <form
+      nzLayout="verical"
+      [formGroup]="registration"
+      (submit)="regService.onSubmit(registration)"
+      nz-form>
+        <div class="form-screaner__header">
+          <h1>Регистрация</h1>
+          <span>Заполните поля ниже.</span>
+        </div>
 
-  <nz-form-item>
-    <nz-form-control>
-      <nz-input-group>
-        <input
-        type="email"
-        nz-input
-        formControlName="email"
-        placeholder="Эл.адрес">
-      </nz-input-group>
-      <nz-form-explain></nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+        <nz-form-item>
+          <label class="form-label">Имя</label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="anticon anticon-user">
+              <input
+              type="text"
+              nz-input
+              formControlName="username"
+              placeholder="Имя">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-control>
-      <nz-input-group>
-        <input
-        type="password"
-        nz-input
-        formControlName="password"
-        placeholder="Пароль">
-      </nz-input-group>
-      <nz-form-explain></nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+        <nz-form-item>
+          <label class="form-label">Эмейл</label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="anticon anticon-mail">
+              <input
+              type="email"
+              nz-input
+              formControlName="email"
+              placeholder="Эл.адрес">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-control>
-      <nz-select
-      style="width: 200px;"
-      nzShowSearch
-      nzNotFoundContent="Нет результатов"
-      formControlName="country"
-      nzPlaceHolder="Страна">
-        <nz-option nzLabel="Украина" nzValue="Ukraine"></nz-option>
-        <nz-option nzLabel="Россия" nzValue="Russia"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
+        <nz-form-item>
+          <label class="form-label">Пароль</label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="anticon anticon-lock">
+              <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="Пароль">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
 
-  <nz-select
-  style="width: 200px;"
-  nzShowSearch
-  nzNotFoundContent="Нет результатов"
-  formControlName="city"
-  nzPlaceHolder="Город">
-    <nz-option nzLabel="Киев" nzValue="Kyiv"></nz-option>
-    <nz-option nzLabel="Харьков" nzValue="Kharkiv"></nz-option>
-  </nz-select>
+        <nz-form-item>
+          <label class="form-label">Повторите пароль</label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="anticon anticon-lock">
+              <input type="password" nz-input placeholder="Повторите пароль">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
 
-  <button nz-button [nzType]="'primary'" type="submit">Sumbit</button>
+        <div nz-row [nzGutter]="24">
+          <div nz-col [nzSpan]="12">
+            <nz-form-item>
+              <label class="form-label">Страна</label>
+              <div>
+                <nz-select
+                nzShowSearch
+                nzNotFoundContent="Нет результатов"
+                formControlName="country"
+                nzPlaceHolder="Выберите страну...">
+                  <nz-option nzLabel="Украина" nzValue="Ukraine"></nz-option>
+                </nz-select>
+              </div>
+            </nz-form-item>
+          </div>
 
-</form>
+          <div nz-col [nzSpan]="12">
+            <nz-form-item>
+              <label class="form-label">Город</label>
+              <div>
+                <nz-select
+                nzShowSearch
+                nzNotFoundContent="Нет результатов"
+                formControlName="city"
+                nzPlaceHolder="Выберите город...">
+                  <nz-option nzLabel="Киев" nzValue="Kyiv"></nz-option>
+                  <nz-option nzLabel="Харьков" nzValue="Kharkiv"></nz-option>
+                </nz-select>
+              </div>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <nz-form-item class="form-footer">
+          <nz-form-control>
+            <button nz-button nzSize="large" [nzType]="'primary'" type="submit">Регистрация</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cover -->
+  <div
+  nz-col nzSpan="7"
+  [ngStyle]="{'background-image': 'url(' + background + ')'}"
+  class="form-screaner__cover"></div>
+</div>
+

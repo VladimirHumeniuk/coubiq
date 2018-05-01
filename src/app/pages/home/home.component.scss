@@ -4,8 +4,9 @@
   }
 
   .ant-layout-header {
-    background: linear-gradient(to right, #347eff, #1ea3ff);
-    color: #fff;
+    background-color: #fff;
+    color: #4d4d4d;
+    border-bottom: 1px solid var(--c-light-gray);
   }
 
   .ant-layout-content {

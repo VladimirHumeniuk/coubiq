@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
+  public background: string = '../../../assets/images/bg_sign-in.png';
+
   constructor() { }
 
   ngOnInit() {

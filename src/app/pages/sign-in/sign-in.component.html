@@ -1,3 +1,46 @@
-<p>
-  sign-in works!
-</p>
+<div nz-row class="form-screaner">
+  <!-- Forn -->
+  <div nz-col nzSpan="17" class="form-screaner__form">
+    <div class="form-screaner__form-container">
+
+      <form
+      nzLayout="verical"
+      nz-form>
+        <div class="form-screaner__header">
+          <h1>Авторизация</h1>
+          <span>Войдите используя свою почту и пароль</span>
+        </div>
+
+        <nz-form-item>
+          <label class="form-label">Эмейл</label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="anticon anticon-user">
+              <input type="text" nz-input placeholder="user@mail.com">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <label class="form-label">Пароль</label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="anticon anticon-mail">
+              <input type="password" nz-input placeholder="Введите свой пароль">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="form-footer">
+          <nz-form-control>
+            <button nz-button nzSize="large" [nzType]="'primary'" type="submit">Войти</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cover -->
+  <div
+  nz-col nzSpan="7"
+  [ngStyle]="{'background-image': 'url(' + background + ')'}"
+  class="form-screaner__cover"></div>
+</div>

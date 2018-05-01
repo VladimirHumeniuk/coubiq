@@ -4,7 +4,7 @@
 }
 
 .logo {
-  color: #fff;
+  color: #4d4d4d;
   font-family: var(--f-montserat);
   font-weight: 800;
 }
@@ -12,12 +12,4 @@
 .header-nav {
   display: flex;
   align-items: center;
-}
-
-.header-nav__btn {
-  &.btn {
-    display: flex;
-    align-items: center;
-    color: #4a8bfc;
-  }
 }

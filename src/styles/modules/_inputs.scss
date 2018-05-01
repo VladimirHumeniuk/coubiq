@@ -1,0 +1,29 @@
+.ant-input {
+  padding: 15px 30px 15px;
+  height: 50px;
+}
+
+.ant-form,
+.ant-form-item {
+  font-family: var(--f-sans);
+}
+
+.ant-input-affix-wrapper .ant-input:not(:first-child) {
+  padding-left: 35px;
+}
+
+.ant-form {
+  label {
+    font-size: 12px;
+  }
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.form-footer {
+  margin-top: 40px;
+}

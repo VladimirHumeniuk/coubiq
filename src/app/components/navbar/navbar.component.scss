@@ -4,9 +4,18 @@
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
   color: #4d4d4d;
   font-family: var(--f-montserat);
   font-weight: 800;
+
+  img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
 }
 
 .header-nav {

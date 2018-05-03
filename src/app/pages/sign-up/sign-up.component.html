@@ -15,7 +15,7 @@
 
         <nz-form-item>
           <label class="form-label">Имя</label>
-          <nz-form-control>
+          <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-user">
               <input
               type="text"
@@ -23,12 +23,13 @@
               formControlName="username"
               placeholder="Имя">
             </nz-input-group>
+            <nz-form-explain *ngIf="registration.get('username').dirty && registration.get('username').errors"> {{ minLengthError("имени", nameMinLength) }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <label class="form-label">Эмейл</label>
-          <nz-form-control>
+          <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-mail">
               <input
               type="email"
@@ -36,12 +37,13 @@
               formControlName="email"
               placeholder="Эл.адрес">
             </nz-input-group>
+            <nz-form-explain *ngIf="registration.get('email').dirty && registration.get('email').errors"> {{ invalidEmail }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <label class="form-label">Пароль</label>
-          <nz-form-control>
+          <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-lock">
               <input
               type="password"
@@ -49,15 +51,21 @@
               formControlName="password"
               placeholder="Пароль">
             </nz-input-group>
+            <nz-form-explain *ngIf="registration.get('password').dirty && registration.get('password').errors"> {{ minLengthError("пароля", passMinLength) }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <label class="form-label">Повторите пароль</label>
-          <nz-form-control>
+          <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-lock">
-              <input type="password" nz-input placeholder="Повторите пароль">
+              <input
+              type="password"
+              nz-input
+              formControlName="passwordConfirm"
+              placeholder="Повторите пароль">
             </nz-input-group>
+            <nz-form-explain *ngIf="isControlInvalid('passwordConfirm')" class="input-group__message"> {{ passwordNotEqual }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
@@ -67,11 +75,10 @@
               <label class="form-label">Страна</label>
               <div>
                 <nz-select
-                nzShowSearch
-                nzNotFoundContent="Нет результатов"
-                formControlName="country"
-                nzPlaceHolder="Выберите страну...">
-                  <nz-option nzLabel="Украина" nzValue="Ukraine"></nz-option>
+                [(ngModel)]="selectedCountry"
+                (ngModelChange)="countryChange($event)"
+                [ngModelOptions]="{standalone: true}">
+                  <nz-option *ngFor="let country of countryData" [nzValue]="country" [nzLabel]="country"></nz-option>
                 </nz-select>
               </div>
             </nz-form-item>
@@ -83,11 +90,11 @@
               <div>
                 <nz-select
                 nzShowSearch
+                [(ngModel)]="selectedCity"
                 nzNotFoundContent="Нет результатов"
-                formControlName="city"
-                nzPlaceHolder="Выберите город...">
-                  <nz-option nzLabel="Киев" nzValue="Kyiv"></nz-option>
-                  <nz-option nzLabel="Харьков" nzValue="Kharkiv"></nz-option>
+                nzPlaceHolder="Выберите город..."
+                [ngModelOptions]="{standalone: true}">
+                  <nz-option *ngFor="let city of cityData[selectedCountry]" [nzValue]="city" [nzLabel]="city"></nz-option>
                 </nz-select>
               </div>
             </nz-form-item>

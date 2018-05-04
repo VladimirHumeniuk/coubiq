@@ -6,7 +6,7 @@
       <form
       nzLayout="verical"
       [formGroup]="registration"
-      (submit)="regService.onSubmit(registration)"
+      (submit)="submitForm(registration)"
       nz-form>
         <div class="form-screaner__header">
           <h1>Регистрация</h1>
@@ -87,15 +87,18 @@
           <div nz-col [nzSpan]="12">
             <nz-form-item>
               <label class="form-label">Город</label>
-              <div>
+              <div [class.has-error]="citySelected == false">
                 <nz-select
                 nzShowSearch
                 [(ngModel)]="selectedCity"
                 nzNotFoundContent="Нет результатов"
                 nzPlaceHolder="Выберите город..."
+                (ngModelChange)="isCitySelected(selectedCity)"
                 [ngModelOptions]="{standalone: true}">
                   <nz-option *ngFor="let city of cityData[selectedCountry]" [nzValue]="city" [nzLabel]="city"></nz-option>
                 </nz-select>
+
+                <nz-form-explain *ngIf="citySelected == false" class="input-group__message"> {{ noCitySelected }} </nz-form-explain>
               </div>
             </nz-form-item>
           </div>

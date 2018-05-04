@@ -3,6 +3,8 @@ import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/fo
 
 import { RegistrationService } from "../../shared/services/registration.service";
 import { EqualValidator } from '../../shared/directives/validate-equal.directive';
+import { registerLocaleData } from '@angular/common';
+import { INVALID } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,6 +20,7 @@ export class SignUpComponent implements OnInit {
 
   public invalidEmail: string = 'Эмейл не валидный.';
   public passwordNotEqual: string = 'Пароли не совпадают.';
+  public noCitySelected: string = 'Выберите город.';
 
   protected nameMinLength: number = 4;
   protected nameMaxLength: number = 36;
@@ -26,6 +29,8 @@ export class SignUpComponent implements OnInit {
 
   public selectedCountry: string = 'Украина';
   public selectedCity: string;
+
+  public citySelected: boolean;
 
   public countryData = ['Украина'];
   public cityData = {
@@ -57,9 +62,7 @@ export class SignUpComponent implements OnInit {
       passwordConfirm: ['', [
         Validators.required,
         EqualValidator('password')
-      ]],
-      country: [],
-      city: [Validators.required]
+      ]]
     })
   }
 
@@ -70,7 +73,7 @@ export class SignUpComponent implements OnInit {
     return result;
   }
 
-  minLengthError(inputName: string, minlength: number) {
+  minLengthError(inputName: string, minlength: number): string {
     const sufix = minlength < 5 ? "а" : "ов";
     return `Минимальная длина ${inputName}: ${minlength} символ${sufix}.`
   }
@@ -79,10 +82,28 @@ export class SignUpComponent implements OnInit {
     this.selectedCity = this.cityData[value][0];
   }
 
-  submitForm(): void {
+  submitForm(form): void {
     for (const i in this.registration.controls) {
       this.registration.controls[i].markAsDirty();
       this.registration.controls[i].updateValueAndValidity();
+    }
+
+    if (this.registration.valid) {
+      console.log('dsds')
+      // this.regService.createUser(form)
+    } else {
+      if (this.selectedCity == null) {
+        this.citySelected = false;
+      }
+      console.log('fals')
+    }
+  }
+
+  isCitySelected(select): void {
+    if (select == null) {
+      this.citySelected = false;
+    } else {
+      this.citySelected = null;
     }
   }
 

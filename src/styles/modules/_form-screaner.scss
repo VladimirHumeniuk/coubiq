@@ -10,6 +10,17 @@
   background-position: center right;
 }
 
+.form-screaner__header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 38px 38px 48px;
+
+  a {
+    margin-left: 10px;
+  }
+}
+
 .form-screaner__form {
   display: table;
 
@@ -21,12 +32,21 @@
   }
 }
 
+.form-screaner__logo {
+  position: absolute;
+  margin: 30px 38px;
+
+  img {
+    width: 38px;
+  }
+}
+
 .form-screaner__form-container {
   display: table-cell;
   vertical-align: middle;
 }
 
-.form-screaner__header {
+.form-screaner__form-header {
   margin-bottom: 50px;
 
   h1 {

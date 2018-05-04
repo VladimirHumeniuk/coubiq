@@ -82,20 +82,18 @@ export class SignUpComponent implements OnInit {
     this.selectedCity = this.cityData[value][0];
   }
 
-  submitForm(form): void {
+  submitForm(form, country, city): void {
     for (const i in this.registration.controls) {
       this.registration.controls[i].markAsDirty();
       this.registration.controls[i].updateValueAndValidity();
     }
 
-    if (this.registration.valid) {
-      console.log('dsds')
-      // this.regService.createUser(form)
-    } else {
-      if (this.selectedCity == null) {
-        this.citySelected = false;
-      }
-      console.log('fals')
+    if (!this.selectedCity) {
+      this.citySelected = false;
+    }
+
+    if (this.registration.valid && this.selectedCity) {
+      this.regService.onSubmit(form, country, city);
     }
   }
 
@@ -103,7 +101,7 @@ export class SignUpComponent implements OnInit {
     if (select == null) {
       this.citySelected = false;
     } else {
-      this.citySelected = null;
+      this.citySelected = true;
     }
   }
 

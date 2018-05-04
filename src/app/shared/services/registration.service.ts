@@ -38,31 +38,25 @@ export class RegistrationService {
         user$.sendEmailVerification();
 
         this.writeUser(user$.uid, user);
+        this.router.navigate(['/']);
       })
       .catch(error => console.log(error))
   };
 
-  onSubmit(form) {
+  onSubmit(form, country, city) {
     const controls = form.controls;
 
     let formData = Object.assign({});
     formData = Object.assign(formData, form.value);
 
-    if (form.valid) {
-      const user: User = {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-        country: formData.country,
-        city: formData.city
-      }
-
-      this.createUser(user);
-    } else {
-      Object.keys(controls)
-        .forEach(controlName => controls[controlName].markAsTouched());
-      return
+    const user: User = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      country: country,
+      city: city
     }
-  }
 
+    this.createUser(user);
+  }
 }

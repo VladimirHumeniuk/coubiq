@@ -8,24 +8,33 @@
     </div>
 
     <div class="form-screaner__header">
-      <span>Нет аккаунта?</span> <a routerLink="/sign-up">Регистрация</a>
+      <span>Немає облікового запису?</span> <a routerLink="/sign-up">Реєстрація</a>
     </div>
 
     <div class="form-screaner__form-container">
       <form
+      (ngSubmit)="login(authentication)"
+      [formGroup]="authentication"
       nzLayout="verical"
       nz-form>
         <div class="form-screaner__form-header">
-          <h1>Авторизация</h1>
-          <span>Войдите используя свою почту и пароль</span>
+          <h1>Авторизація</h1>
+          <span>Увійдіть використовуючи свій емейл та пароль</span>
         </div>
 
         <nz-form-item>
-          <label class="form-label">Эмейл</label>
+          <label class="form-label">Емейл</label>
           <nz-form-control>
             <nz-input-group nzPrefixIcon="anticon anticon-mail">
-              <input type="text" nz-input placeholder="user@mail.com">
+              <input
+              type="email"
+              name="email"
+              formControlName="email"
+              nz-input
+              placeholder="user@mail.com">
             </nz-input-group>
+            <nz-form-explain *ngIf="authentication.get('email').dirty && authentication.get('email').errors">{{ invalidEmail }}</nz-form-explain>
+            <nz-form-explain *ngIf="authService.invalidEmailMsg">{{ authService.invalidEmailMsg }}</nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
@@ -33,14 +42,21 @@
           <label class="form-label">Пароль</label>
           <nz-form-control>
             <nz-input-group nzPrefixIcon="anticon anticon-mail">
-              <input type="password" nz-input placeholder="Введите пароль">
+              <input
+              type="password"
+              name="password"
+              formControlName="password"
+              nz-input
+              placeholder="Введіть пароль">
             </nz-input-group>
+            <nz-form-explain *ngIf="authentication.get('password').dirty && authentication.get('password').errors">{{ invalidPassword }}</nz-form-explain>
+            <nz-form-explain *ngIf="authService.invalidPasswordMsg">{{ authService.invalidPasswordMsg }}</nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item class="form-footer">
           <nz-form-control>
-            <button nz-button nzSize="large" [nzType]="'primary'" type="submit">Войти</button>
+            <button nz-button nzSize="large" [nzType]="'primary'" type="submit">Увійти</button>
           </nz-form-control>
         </nz-form-item>
       </form>

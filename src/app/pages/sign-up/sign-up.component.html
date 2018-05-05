@@ -8,7 +8,7 @@
     </div>
 
     <div class="form-screaner__header">
-      <span>Уже есть аккаунт?</span> <a routerLink="/sign-in">Войти</a>
+      <span>Вже є обліковий запис?</span> <a routerLink="/sign-in">Увійти</a>
     </div>
 
     <div class="form-screaner__form-container">
@@ -18,33 +18,33 @@
       (submit)="submitForm(registration, selectedCountry, selectedCity)"
       nz-form>
         <div class="form-screaner__form-header">
-          <h1>Регистрация</h1>
-          <span>Заполните поля ниже.</span>
+          <h1>Реєстрація</h1>
+          <span>Заповніть поля нижче.</span>
         </div>
 
         <nz-form-item>
-          <label class="form-label">Имя</label>
+          <label class="form-label">Ім'я</label>
           <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-user">
               <input
               type="text"
               nz-input
               formControlName="username"
-              placeholder="Имя">
+              placeholder="Ім'я">
             </nz-input-group>
-            <nz-form-explain *ngIf="registration.get('username').dirty && registration.get('username').errors"> {{ minLengthError("имени", nameMinLength) }} </nz-form-explain>
+            <nz-form-explain *ngIf="registration.get('username').dirty && registration.get('username').errors"> {{ minLengthError("імені", nameMinLength) }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <label class="form-label">Эмейл</label>
+          <label class="form-label">Емейл</label>
           <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-mail">
               <input
               type="email"
               nz-input
               formControlName="email"
-              placeholder="Эл.адрес">
+              placeholder="Емейл">
             </nz-input-group>
             <nz-form-explain *ngIf="registration.get('email').dirty && registration.get('email').errors"> {{ invalidEmail }} </nz-form-explain>
           </nz-form-control>
@@ -60,28 +60,28 @@
               formControlName="password"
               placeholder="Пароль">
             </nz-input-group>
-            <nz-form-explain *ngIf="registration.get('password').dirty && registration.get('password').errors"> {{ minLengthError("пароля", passMinLength) }} </nz-form-explain>
+            <nz-form-explain *ngIf="registration.get('password').dirty && registration.get('password').errors"> {{ minLengthError("паролю", passMinLength) }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <label class="form-label">Повторите пароль</label>
+          <label class="form-label">Повторіть пароль</label>
           <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-lock">
               <input
               type="password"
               nz-input
               formControlName="passwordConfirm"
-              placeholder="Повторите пароль">
+              placeholder="Повторіть пароль">
             </nz-input-group>
-            <nz-form-explain *ngIf="isControlInvalid('passwordConfirm')" class="input-group__message"> {{ passwordNotEqual }} </nz-form-explain>
+            <nz-form-explain *ngIf="registration.get('passwordConfirm').dirty && registration.get('passwordConfirm').errors || isControlInvalid('passwordConfirm')" class="input-group__message"> {{ passwordNotEqual }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
         <div nz-row [nzGutter]="24">
           <div nz-col [nzSpan]="12">
             <nz-form-item>
-              <label class="form-label">Страна</label>
+              <label class="form-label">Країна</label>
               <div>
                 <nz-select
                 [(ngModel)]="selectedCountry"
@@ -95,13 +95,13 @@
 
           <div nz-col [nzSpan]="12">
             <nz-form-item>
-              <label class="form-label">Город</label>
+              <label class="form-label">Місто</label>
               <div [class.has-error]="citySelected == false">
                 <nz-select
                 nzShowSearch
                 [(ngModel)]="selectedCity"
-                nzNotFoundContent="Нет результатов"
-                nzPlaceHolder="Выберите город..."
+                nzNotFoundContent="Немає результатів"
+                nzPlaceHolder="Оберіть місто..."
                 (ngModelChange)="isCitySelected(selectedCity)"
                 [ngModelOptions]="{standalone: true}">
                   <nz-option *ngFor="let city of cityData[selectedCountry]" [nzValue]="city" [nzLabel]="city"></nz-option>
@@ -115,7 +115,7 @@
 
         <nz-form-item class="form-footer">
           <nz-form-control>
-            <button nz-button nzSize="large" [nzType]="'primary'" type="submit">Регистрация</button>
+            <button nz-button nzSize="large" [nzType]="'primary'" type="submit">Реєстрація</button>
           </nz-form-control>
         </nz-form-item>
       </form>

@@ -18,23 +18,23 @@ export class SignUpComponent implements OnInit {
 
   private emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-  public invalidEmail: string = 'Эмейл не валидный.';
-  public passwordNotEqual: string = 'Пароли не совпадают.';
-  public noCitySelected: string = 'Выберите город.';
+  public invalidEmail: string = 'Емейл не дійсний.';
+  public passwordNotEqual: string = 'Паролі не співпадають.';
+  public noCitySelected: string = 'Оберіть місто.';
 
   protected nameMinLength: number = 4;
   protected nameMaxLength: number = 36;
   protected passMinLength: number = 6;
   protected passMaxLength: number = 30;
 
-  public selectedCountry: string = 'Украина';
+  public selectedCountry: string = 'Україна';
   public selectedCity: string;
 
   public citySelected: boolean;
 
-  public countryData = ['Украина'];
+  public countryData = ['Україна'];
   public cityData = {
-    Украина: ['Киев', 'Харьков', 'Львов']
+    Україна: ['Київ', 'Харків', 'Львів']
   };
 
   constructor(
@@ -74,8 +74,8 @@ export class SignUpComponent implements OnInit {
   }
 
   minLengthError(inputName: string, minlength: number): string {
-    const sufix = minlength < 5 ? "а" : "ов";
-    return `Минимальная длина ${inputName}: ${minlength} символ${sufix}.`
+    const sufix = minlength < 5 ? "и" : "ів";
+    return `Мінімальна довжина ${inputName}: ${minlength} символ${sufix}.`
   }
 
   countryChange(value: string): void {

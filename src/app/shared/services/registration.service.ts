@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 
 import { User } from '../interfaces/user';
 
@@ -17,18 +18,23 @@ export class RegistrationService {
   constructor(
     private authFb: AngularFireAuth,
     private db: AngularFireDatabase,
-    private router: Router
+    private router: Router,
   ) { }
 
 
   writeUser(uid: string, user: User) {
-    this.db.object(`${this.usersRef}/${uid}`).set({
-      username: user.username,
-      email: user.email,
-      password: user.password,
-      country: user.country,
-      city: user.city
-    })
+    firebase.auth().currentUser.updateProfile({
+      displayName: user.username,
+      photoURL: ''
+    }).then((() => {
+      this.db.object(`${this.usersRef}/${uid}`).set({
+        username: user.username,
+        email: user.email,
+        password: user.password,
+        country: user.country,
+        city: user.city
+      })
+    }))
   };
 
   createUser(user: User) {
@@ -36,6 +42,7 @@ export class RegistrationService {
       .then((user$) => {
         this.user = user$;
         user$.sendEmailVerification();
+
 
         this.writeUser(user$.uid, user);
         this.router.navigate(['/']);

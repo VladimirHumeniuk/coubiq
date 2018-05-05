@@ -3,7 +3,20 @@
     <img src="/assets/images/logo-large.png" alt="">
     Coubiq</a>
 
-  <nav class="header-nav">
+  <div class="header-nav" *ngIf="authService.isUserEmailLoggedIn">
+    <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'">
+      <a nz-dropdown>
+        {{ currService.current?.username }}
+      </a>
+      <ul class="dropdown-collapse" nz-menu>
+        <li nz-menu-item><i class="anticon anticon-setting"></i> Мої налаштування</li>
+        <li nz-menu-divider></li>
+        <li nz-menu-item (click)="logout()"><i class="anticon anticon-logout"></i> Вийти</li>
+      </ul>
+    </nz-dropdown>
+  </div>
+
+  <nav class="header-nav" *ngIf="!authService.isUserEmailLoggedIn">
     <a
     routerLink="/sign-in"
     class="header-nav__btn link link--black">Увійти</a>

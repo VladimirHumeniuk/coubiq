@@ -67,9 +67,16 @@ export class AuthService {
       })
   }
 
+  get isUserEmailLoggedIn(): boolean {
+    if (this.currentUser !== null) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   public logout(): void {
     this.authFb.auth.signOut();
     this.router.navigate(['/']);
   }
-
 }

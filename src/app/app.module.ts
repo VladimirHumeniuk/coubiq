@@ -28,6 +28,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { RegistrationService } from './shared/services/registration.service';
 import { AuthService } from './shared/services/auth.service';
+import { CurrentService } from './shared/services/current.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { AuthService } from './shared/services/auth.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [RegistrationService, AuthService],
+  providers: [RegistrationService, AuthService, CurrentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

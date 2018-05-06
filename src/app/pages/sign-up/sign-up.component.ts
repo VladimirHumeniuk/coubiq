@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegistrationService } from "../../shared/services/registration.service";
 import { EqualValidator } from '../../shared/directives/validate-equal.directive';
-import { registerLocaleData } from '@angular/common';
-import { INVALID } from '@angular/forms/src/model';
+import { Countries } from '../../shared/enums/countries.enum';
+import { CitiesUa } from '../../shared/enums/cities-ua.enum';
 
 @Component({
   selector: 'app-sign-up',
@@ -27,14 +26,14 @@ export class SignUpComponent implements OnInit {
   protected passMinLength: number = 6;
   protected passMaxLength: number = 30;
 
-  public selectedCountry: string = 'Україна';
+  public selectedCountry: string = Countries.Ukraine;
   public selectedCity: string;
 
   public citySelected: boolean;
 
-  public countryData = ['Україна'];
+  public countryData = Object.values(Countries);
   public cityData = {
-    Україна: ['Київ', 'Харків', 'Львів']
+    Україна: Object.values(CitiesUa)
   };
 
   constructor(

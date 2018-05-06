@@ -20,3 +20,27 @@ body {
     width: 1280px;
   }
 }
+
+.ant-layout {
+  height: 100%;
+}
+
+.ant-layout-header {
+  background-color: #fff;
+  color: #4d4d4d;
+  border-bottom: 1px solid var(--c-light-gray);
+}
+
+.ant-layout-content {
+  background-color: #fff;
+}
+
+.ant-layout-content {
+  padding: 40px 64px;
+  background-color: #fff;
+}
+
+.ant-layout-footer,
+.ant-layout-sider {
+  background-color: #f9fafb;
+}

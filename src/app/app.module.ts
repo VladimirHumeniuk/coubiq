@@ -29,6 +29,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { RegistrationService } from './shared/services/registration.service';
 import { AuthService } from './shared/services/auth.service';
 import { CurrentService } from './shared/services/current.service';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CurrentService } from './shared/services/current.service';
     HomeComponent,
     NavbarComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    SettingsComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,7 +1,6 @@
 import { CitiesUa } from './../../shared/enums/cities-ua.enum';
 import { Countries } from './../../shared/enums/countries.enum';
 import { CurrentService } from './../../shared/services/current.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -11,9 +10,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-
-  public settings: FormGroup;
-  public current;
 
   protected nameMinLength: number = 4;
   protected nameMaxLength: number = 36;
@@ -34,7 +30,6 @@ export class SettingsComponent implements OnInit {
   };
 
   constructor(
-    private fb: FormBuilder,
     public db: AngularFireDatabase,
     public currentService: CurrentService
   ) {}

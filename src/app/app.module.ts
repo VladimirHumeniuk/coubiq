@@ -30,6 +30,7 @@ import { RegistrationService } from './shared/services/registration.service';
 import { AuthService } from './shared/services/auth.service';
 import { CurrentService } from './shared/services/current.service';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [RegistrationService, AuthService, CurrentService],
+  providers: [RegistrationService, AuthService, CurrentService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

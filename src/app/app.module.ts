@@ -31,6 +31,7 @@ import { AuthService } from './shared/services/auth.service';
 import { CurrentService } from './shared/services/current.service';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { UpdateUserService } from './shared/services/update-user.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [RegistrationService, AuthService, CurrentService, AuthGuard],
+  providers: [RegistrationService, AuthService, CurrentService, AuthGuard, UpdateUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

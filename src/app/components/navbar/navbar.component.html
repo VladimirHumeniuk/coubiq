@@ -6,7 +6,7 @@
   <div class="header-nav" *ngIf="authService.isUserEmailLoggedIn">
     <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'">
       <a nz-dropdown>
-        {{ currService.current?.username }}
+        {{ (currService.user | async)?.username }}
       </a>
       <ul class="dropdown-collapse" nz-menu>
         <li routerLink="/settings" nz-menu-item><i class="anticon anticon-setting"></i> Мої налаштування</li>

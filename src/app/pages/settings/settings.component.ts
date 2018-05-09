@@ -3,6 +3,9 @@ import { Countries } from './../../shared/enums/countries.enum';
 import { CurrentService } from './../../shared/services/current.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { UpdateUserService } from '../../shared/services/update-user.service';
+import * as firebase from 'firebase/app';
+import { NzCollapseModule } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-settings',
@@ -28,13 +31,28 @@ export class SettingsComponent implements OnInit {
   public cityData = {
     Україна: Object.values(CitiesUa)
   };
+  public currentEmail: string;
 
   constructor(
     public db: AngularFireDatabase,
-    public currentService: CurrentService
-  ) {}
+    public currentService: CurrentService,
+    public updateUser: UpdateUserService
+  ) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentEmail = user.email;
+      }
+    });
+  }
+
+  updateUserData(uid: string, username: string, oldEmail: string, newEmail: string, password: string): void {
+    // console.log(newEmail, oldEmail, password)
+
+    this.updateUser.changeEmail(oldEmail, password, newEmail)
+  }
 
   ngOnInit() {
+
   }
 
 }

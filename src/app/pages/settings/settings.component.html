@@ -16,6 +16,13 @@
 
       <h2>Основна інформація</h2>
       <form
+      (submit)="updateUserData(
+        currentService.current.key,
+        currentService.current.username,
+        currentEmail,
+        currentService.current.email,
+        currentService.current.password
+      )"
       *ngIf="currentService.current"
       nzLayout="verical">
         <nz-form-item>

@@ -30,7 +30,14 @@ export class CurrentService {
     return this.authFb.authState
     .switchMap(user => {
       if (user) {
-        return this.db.object<User>(`users/${user.uid}`).valueChanges();
+        return this.db.object<User>(`users/${user.uid}`)
+          .snapshotChanges().map(changes => {
+            const key = changes.payload.key;
+            return {
+              key,
+              ...changes.payload.val()
+            }
+          })
       } else {
         return Observable.of(null)
       }

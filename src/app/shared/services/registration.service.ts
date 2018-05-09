@@ -18,7 +18,7 @@ export class RegistrationService {
   constructor(
     private authFb: AngularFireAuth,
     private db: AngularFireDatabase,
-    private router: Router,
+    private router: Router
   ) { }
 
 
@@ -41,9 +41,8 @@ export class RegistrationService {
     this.authFb.auth.createUserWithEmailAndPassword(user.email, user.password)
       .then((user$) => {
         this.user = user$;
+
         user$.sendEmailVerification();
-
-
         this.writeUser(user$.uid, user);
         this.router.navigate(['/']);
       })

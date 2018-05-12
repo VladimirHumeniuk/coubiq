@@ -23,7 +23,7 @@
         currentService.current.email,
         currentService.current.country,
         currentService.current.city
-      );"
+      ); form.reset()"
       *ngIf="currentService.current"
       nzLayout="verical">
         <nz-form-item>
@@ -31,13 +31,13 @@
           <nz-form-control nzHasFeedback>
             <nz-input-group nzPrefixIcon="anticon anticon-user">
               <input
-              type="text"
               nz-input
+              name="username"
+              type="text"
               minlength="{{ nameMinLength }}"
               maxlength="{{ nameMaxLength }}"
               required
               [(ngModel)]="currentService.current.username"
-              [ngModelOptions]="{standalone: true}"
               placeholder="Ім'я">
             </nz-input-group>
           </nz-form-control>
@@ -54,7 +54,6 @@
               pattern="{{ emailRegex }}"
               required
               [(ngModel)]="currentService.current.email"
-              [ngModelOptions]="{standalone: true}"
               placeholder="Емейл">
             </nz-input-group>
           </nz-form-control>
@@ -66,8 +65,8 @@
               <label class="form-label">Країна</label>
               <div>
                 <nz-select
-                [(ngModel)]="currentService.current.country"
-                [ngModelOptions]="{standalone: true}">
+                name="country"
+                [(ngModel)]="currentService.current.country">
                   <nz-option *ngFor="let country of countryData" [nzValue]="country" [nzLabel]="country"></nz-option>
                 </nz-select>
               </div>
@@ -79,11 +78,11 @@
               <label class="form-label">Місто</label>
               <div>
                 <nz-select
+                name="city"
                 nzShowSearch
                 [(ngModel)]="currentService.current.city"
                 nzNotFoundContent="Немає результатів"
-                nzPlaceHolder="Оберіть місто..."
-                [ngModelOptions]="{standalone: true}">
+                nzPlaceHolder="Оберіть місто...">
                   <nz-option *ngFor="let city of cityData[selectedCountry]" [nzValue]="city" [nzLabel]="city"></nz-option>
                 </nz-select>
               </div>

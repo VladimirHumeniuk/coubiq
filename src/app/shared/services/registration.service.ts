@@ -21,7 +21,6 @@ export class RegistrationService {
     private router: Router
   ) { }
 
-
   writeUser(uid: string, user: User) {
     firebase.auth().currentUser.updateProfile({
       displayName: user.username,

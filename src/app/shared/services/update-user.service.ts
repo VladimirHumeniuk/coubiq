@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+import { User } from '../interfaces/user';
+import { CurrentService } from './current.service';
 
 @Injectable()
 export class UpdateUserService {
@@ -12,6 +14,7 @@ export class UpdateUserService {
 
   constructor(
     private authFb: AngularFireAuth,
+    private currentService: CurrentService,
     private db: AngularFireDatabase
   ) { }
 
@@ -30,11 +33,10 @@ export class UpdateUserService {
     firebase.auth().signInWithEmailAndPassword(oldEmail, password)
     .then((user) => {
       user.updateEmail(newEmail);
-      user.sendEmailVerification();
 
       this.db.object(`${this.userRef}/${uid}`).update({
         email: newEmail
-      })
+      }).then(() => user.sendEmailVerification())
     })
   }
 
@@ -45,8 +47,14 @@ export class UpdateUserService {
     })
   }
 
-  updateUserData(username: string, coutnry: string, city: string, email: string) {
+  updateUserData(uid: string, user: User, oldEmail: string) {
+    console.log(uid, user, oldEmail, this.currentService.current.password)
 
+    this.updateUsername(uid, user.username);
+    this.changeLocation(uid, user.country, user.city);
+
+    if (user.email !== oldEmail) {
+      this.changeEmail(uid, oldEmail, this.currentService.current.password, user.email)
+    }
   }
-
 }

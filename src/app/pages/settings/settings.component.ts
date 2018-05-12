@@ -6,6 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { UpdateUserService } from '../../shared/services/update-user.service';
 import * as firebase from 'firebase/app';
 import { NzCollapseModule } from 'ng-zorro-antd';
+import { User } from '../../shared/interfaces/user';
 
 @Component({
   selector: 'app-settings',
@@ -45,14 +46,23 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  updateUserData(uid: string, username: string, oldEmail: string, newEmail: string, password: string): void {
-    // console.log(newEmail, oldEmail, password)
+  updateUserData(
+    uid: string,
+    username: string,
+    email: string,
+    country: string,
+    city: string
+  ): void {
 
-    this.updateUser.changeEmail(oldEmail, password, newEmail)
+    const user: User = {
+      username: username,
+      email: email,
+      country: country,
+      city: city
+    }
+
+    this.updateUser.updateUserData(uid, user, this.currentEmail);
   }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 }

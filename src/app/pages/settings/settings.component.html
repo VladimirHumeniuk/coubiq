@@ -14,6 +14,8 @@
 
       <nz-divider></nz-divider>
 
+      <nz-alert *ngIf="dataChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Нові дані успішно збережено." nzShowIcon></nz-alert>
+
       <h2>Основна інформація</h2>
       <form
       #settings="ngForm"
@@ -23,7 +25,7 @@
         currentService.current.email,
         currentService.current.country,
         currentService.current.city
-      ); settings.reset()"
+      );"
       *ngIf="currentService.current"
       nz-form
       nzLayout="verical">
@@ -104,6 +106,8 @@
 
       <nz-divider></nz-divider>
 
+      <nz-alert *ngIf="passwordChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Новий пароль успішно збережено." nzShowIcon></nz-alert>
+
       <h2>Зміна паролю</h2>
       <form
       [formGroup]="newPassForm"
@@ -137,7 +141,7 @@
               required
               placeholder="*******">
             </nz-input-group>
-            <nz-form-explain *ngIf="newPassForm.get('newPassword').dirty && newPassForm.get('newPassword').errors"> {{ minLengthError("паролю", passMinLength) }} </nz-form-explain>
+            <nz-form-explain *ngIf="newPassForm.get('newPassword').dirty && newPassForm.get('newPassword').errors"> {{ minLengthError("паролю", passMinLength, passMaxLength) }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 

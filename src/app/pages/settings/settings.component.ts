@@ -35,9 +35,11 @@ export class SettingsComponent implements OnInit {
     Україна: Object.values(CitiesUa)
   };
   public currentEmail: string;
+  public dataChanged: boolean = false;
 
   public newPassForm: FormGroup;
   public password: string;
+  public passwordChanged: boolean = false;
 
   constructor(
     public db: AngularFireDatabase,
@@ -79,9 +81,10 @@ export class SettingsComponent implements OnInit {
       email: email,
       country: country,
       city: city
-    }
+    };
 
     this.updateUser.updateUserData(uid, user, this.currentEmail);
+    this.dataChanged = true;
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -105,6 +108,8 @@ export class SettingsComponent implements OnInit {
     if (this.newPassForm.valid) {
       this.password = null;
       this.updateUser.updatePass(password, form);
+
+      this.passwordChanged = true;
     }
   }
 

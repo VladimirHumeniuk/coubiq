@@ -32,7 +32,7 @@
               formControlName="username"
               placeholder="Ім'я">
             </nz-input-group>
-            <nz-form-explain *ngIf="registration.get('username').dirty && registration.get('username').errors"> {{ minLengthError("імені", nameMinLength) }} </nz-form-explain>
+            <nz-form-explain *ngIf="registration.get('username').dirty && registration.get('username').errors"> {{ minLengthError("імені", nameMinLength, nameMaxLength) }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
@@ -60,7 +60,7 @@
               formControlName="password"
               placeholder="Пароль">
             </nz-input-group>
-            <nz-form-explain *ngIf="registration.get('password').dirty && registration.get('password').errors"> {{ minLengthError("паролю", passMinLength) }} </nz-form-explain>
+            <nz-form-explain *ngIf="registration.get('password').dirty && registration.get('password').errors"> {{ minLengthError("паролю", passMinLength, passMaxLength) }} </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 

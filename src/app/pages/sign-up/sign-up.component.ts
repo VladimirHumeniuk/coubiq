@@ -72,9 +72,9 @@ export class SignUpComponent implements OnInit {
     return result;
   }
 
-  minLengthError(inputName: string, minlength: number): string {
+  minLengthError(inputName: string, minlength: number, maxlength: number): string {
     const sufix = minlength < 5 ? "и" : "ів";
-    return `Мінімальна довжина ${inputName}: ${minlength} символ${sufix}.`
+    return `Мінімальна довжина ${inputName}: ${minlength} символ${sufix}. Максимальна: ${maxlength}.`
   }
 
   countryChange(value: string): void {

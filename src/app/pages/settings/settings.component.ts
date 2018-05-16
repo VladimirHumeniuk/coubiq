@@ -7,6 +7,8 @@ import { UpdateUserService } from '../../shared/services/update-user.service';
 import * as firebase from 'firebase/app';
 import { NzCollapseModule } from 'ng-zorro-antd';
 import { User } from '../../shared/interfaces/user';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { EqualValidator } from '../../shared/directives/validate-equal.directive';
 
 @Component({
   selector: 'app-settings',
@@ -34,8 +36,12 @@ export class SettingsComponent implements OnInit {
   };
   public currentEmail: string;
 
+  public newPassForm: FormGroup;
+  public password: string;
+
   constructor(
     public db: AngularFireDatabase,
+    private fb: FormBuilder,
     public currentService: CurrentService,
     public updateUser: UpdateUserService
   ) {
@@ -44,6 +50,20 @@ export class SettingsComponent implements OnInit {
         this.currentEmail = user.email;
       }
     });
+  }
+
+  initPassForm() {
+    this.newPassForm = this.fb.group({
+      newPassword: ['', [
+        Validators.required,
+        Validators.minLength(this.passMinLength),
+        Validators.maxLength(this.passMaxLength)
+      ]],
+      passwordConfirm: ['', [
+        Validators.required,
+        EqualValidator('newPassword')
+      ]]
+    })
   }
 
   updateUserData(
@@ -64,5 +84,31 @@ export class SettingsComponent implements OnInit {
     this.updateUser.updateUserData(uid, user, this.currentEmail);
   }
 
-  ngOnInit() {}
+  isControlInvalid(controlName: string): boolean {
+    const control = this.newPassForm.controls[controlName];
+    const result = control.invalid && control.touched;
+
+    return result;
+  }
+
+  minLengthError(inputName: string, minlength: number, maxlength: number): string {
+    const sufix = minlength < 5 ? "и" : "ів";
+    return `Мінімальна довжина ${inputName}: ${minlength} символ${sufix}. Максимальна: ${maxlength}.`
+  }
+
+  submitForm(password, form): void {
+    for (const i in this.newPassForm.controls) {
+      this.newPassForm.controls[i].markAsDirty();
+      this.newPassForm.controls[i].updateValueAndValidity();
+    }
+
+    if (this.newPassForm.valid) {
+      this.password = null;
+      this.updateUser.updatePass(password, form);
+    }
+  }
+
+  ngOnInit() {
+    this.initPassForm();
+  }
 }

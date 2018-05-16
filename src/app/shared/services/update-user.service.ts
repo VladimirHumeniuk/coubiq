@@ -12,6 +12,8 @@ export class UpdateUserService {
   protected userRef: string = 'users';
   protected user: Observable<any[]>;
 
+  public wrongPassword: boolean = false;
+
   constructor(
     private authFb: AngularFireAuth,
     private currentService: CurrentService,
@@ -45,6 +47,30 @@ export class UpdateUserService {
       country: country,
       city: city
     })
+  }
+
+  updatePass(password: string, form: any) {
+    const user = this.authFb.auth.currentUser;
+    const credentials = firebase.auth.EmailAuthProvider.credential(user.email, password);
+    const controls = form.controls;
+
+    let formData = Object.assign({});
+    formData = Object.assign(formData, form.value);
+
+    user.reauthenticateWithCredential(credentials)
+      .then(() => {
+        this.wrongPassword = false;
+
+        this.authFb.auth.currentUser.updatePassword(formData.newPassword).then(function() {
+
+          form.reset()
+        }).catch(function(error) {
+          console.log(error)
+        });
+      })
+      .catch((error) => {
+        this.wrongPassword = true
+      });
   }
 
   updateUserData(uid: string, user: User, oldEmail: string) {

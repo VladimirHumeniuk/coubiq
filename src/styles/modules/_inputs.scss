@@ -27,3 +27,34 @@
 .form-footer {
   padding-top: 30px;
 }
+
+.is-invalid {
+  input {
+    border-color: #f5222d;
+  }
+
+  .ant-form-explain {
+    color: #f5222d;
+  }
+
+  &::after {
+    content: '\e62e';
+    color: #f5222d;
+    animation-name: diffZoomIn2 !important;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    visibility: visible;
+    pointer-events: none;
+    width: 32px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -7px;
+    text-align: center;
+    font-size: 14px;
+    animation: zoomIn 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    font-family: 'anticon';
+    text-rendering: optimizeLegibility;
+    z-index: 1;
+  }
+}

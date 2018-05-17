@@ -9,7 +9,14 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class CurrentService {
 
-  public current;
+  public current: User = {
+    key: '',
+    username: '',
+    email: '',
+    country: '',
+    city: ''
+  };
+
   public user;
 
   constructor(

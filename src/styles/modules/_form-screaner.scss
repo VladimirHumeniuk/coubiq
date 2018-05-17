@@ -3,7 +3,7 @@
 .form-screaner,
 .form-screaner__cover,
 .form-screaner__form {
-  @media (min-width: $m) {
+  @media (min-width: $lg) {
     height: 100%;
   }
 }
@@ -13,7 +13,7 @@
   background-size: cover;
   background-position: center right;
 
-  @media (max-width: $m) {
+  @media (max-width: $lg) {
     display: none;
   }
 }
@@ -24,7 +24,7 @@
   right: 0;
   margin: 38px 38px 48px;
 
-  @media (max-width: $xs) {
+  @media (max-width: $sm) {
     margin-right: 5%;
   }
 
@@ -50,7 +50,7 @@
   position: absolute;
   margin: 30px 38px;
 
-  @media (max-width: $xs) {
+  @media (max-width: $sm) {
     margin-left: 5%;
   }
 

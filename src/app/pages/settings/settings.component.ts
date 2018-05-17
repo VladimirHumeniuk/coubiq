@@ -41,6 +41,8 @@ export class SettingsComponent implements OnInit {
   public password: string;
   public passwordChanged: boolean = false;
 
+  public current;
+
   constructor(
     public db: AngularFireDatabase,
     private fb: FormBuilder,
@@ -99,7 +101,7 @@ export class SettingsComponent implements OnInit {
     return `Мінімальна довжина ${inputName}: ${minlength} символ${sufix}. Максимальна: ${maxlength}.`
   }
 
-  submitForm(password, form): void {
+  updatePassword(password, form): void {
     for (const i in this.newPassForm.controls) {
       this.newPassForm.controls[i].markAsDirty();
       this.newPassForm.controls[i].updateValueAndValidity();
@@ -109,7 +111,7 @@ export class SettingsComponent implements OnInit {
       this.password = null;
       this.updateUser.updatePass(password, form);
 
-      this.passwordChanged = true;
+      this.password = null;
     }
   }
 

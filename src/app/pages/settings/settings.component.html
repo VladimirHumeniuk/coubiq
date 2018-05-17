@@ -14,159 +14,165 @@
 
       <nz-divider></nz-divider>
 
-      <nz-alert *ngIf="dataChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Нові дані успішно збережено." nzShowIcon></nz-alert>
+      <div nz-row nzGutter="32">
+        <div nz-col nzSpan="24" nzXl="12">
+          <nz-alert *ngIf="dataChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Нові дані успішно збережено." nzShowIcon></nz-alert>
 
-      <h2>Основна інформація</h2>
-      <form
-      #settings="ngForm"
-      (submit)="updateUserData(
-        currentService.current.key,
-        currentService.current.username,
-        currentService.current.email,
-        currentService.current.country,
-        currentService.current.city
-      );"
-      *ngIf="currentService.current"
-      nz-form
-      nzLayout="verical">
-        <nz-form-item>
-          <label class="form-label">Ім'я</label>
-          <nz-form-control nzHasFeedback>
-            <nz-input-group nzPrefixIcon="anticon anticon-user">
-              <input
-              nz-input
-              #username="ngModel"
-              name="username"
-              type="text"
-              minlength="{{ nameMinLength }}"
-              maxlength="{{ nameMaxLength }}"
-              required
-              [(ngModel)]="currentService.current.username"
-              placeholder="Ім'я">
-            </nz-input-group>
-            <nz-form-explain *ngIf="username.invalid">{{ minLengthError("імені", nameMinLength, nameMaxLength) }}</nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
-
-        <nz-form-item>
-          <label class="form-label">Емейл</label>
-          <nz-form-control nzHasFeedback>
-            <nz-input-group nzPrefixIcon="anticon anticon-mail">
-              <input
-              nz-input
-              #email="ngModel"
-              name="email"
-              type="email"
-              pattern="{{ emailRegex }}"
-              required
-              [(ngModel)]="currentService.current.email"
-              placeholder="Емейл">
-            </nz-input-group>
-            <nz-form-explain *ngIf="email.invalid">{{ invalidEmail }}</nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
-
-        <div nz-row [nzGutter]="24">
-          <div nz-col [nzSpan]="12">
+          <h2>Основна інформація</h2>
+          <form
+          #settings="ngForm"
+          (submit)="updateUserData(
+            currentService.current.key,
+            currentService.current.username,
+            currentService.current.email,
+            currentService.current.country,
+            currentService.current.city
+          );"
+          nz-form
+          nzLayout="verical">
+          <nz-spin [nzSpinning]="!currentService.current.key"></nz-spin>
             <nz-form-item>
-              <label class="form-label">Країна</label>
-              <div>
-                <nz-select
-                name="country"
-                [(ngModel)]="currentService.current.country">
-                  <nz-option *ngFor="let country of countryData" [nzValue]="country" [nzLabel]="country"></nz-option>
-                </nz-select>
-              </div>
+              <label class="form-label">Ім'я</label>
+              <nz-form-control nzHasFeedback>
+                <nz-input-group nzPrefixIcon="anticon anticon-user">
+                  <input
+                  nz-input
+                  #username="ngModel"
+                  name="username"
+                  type="text"
+                  minlength="{{ nameMinLength }}"
+                  maxlength="{{ nameMaxLength }}"
+                  required
+                  [(ngModel)]="currentService.current.username"
+                  placeholder="Ім'я">
+                </nz-input-group>
+                <nz-form-explain *ngIf="username.invalid && !username.pristine">{{ minLengthError("імені", nameMinLength, nameMaxLength) }}</nz-form-explain>
+              </nz-form-control>
             </nz-form-item>
-          </div>
 
-          <div nz-col [nzSpan]="12">
             <nz-form-item>
-              <label class="form-label">Місто</label>
-              <div>
-                <nz-select
-                name="city"
-                nzShowSearch
-                [(ngModel)]="currentService.current.city"
-                nzNotFoundContent="Немає результатів"
-                nzPlaceHolder="Оберіть місто...">
-                  <nz-option *ngFor="let city of cityData[selectedCountry]" [nzValue]="city" [nzLabel]="city"></nz-option>
-                </nz-select>
-              </div>
+              <label class="form-label">Емейл</label>
+              <nz-form-control nzHasFeedback>
+                <nz-input-group nzPrefixIcon="anticon anticon-mail">
+                  <input
+                  nz-input
+                  #email="ngModel"
+                  name="email"
+                  type="email"
+                  pattern="{{ emailRegex }}"
+                  required
+                  [(ngModel)]="currentService.current.email"
+                  placeholder="Емейл">
+                </nz-input-group>
+                <nz-form-explain *ngIf="email.invalid && !email.pristine">{{ invalidEmail }}</nz-form-explain>
+              </nz-form-control>
             </nz-form-item>
-          </div>
+
+            <div nz-row [nzGutter]="24">
+              <div nz-col nzSpan="12">
+                <nz-form-item>
+                  <label class="form-label">Країна</label>
+                  <div>
+                    <nz-select
+                    name="country"
+                    [(ngModel)]="currentService.current.country">
+                      <nz-option *ngFor="let country of countryData" [nzValue]="country" [nzLabel]="country"></nz-option>
+                    </nz-select>
+                  </div>
+                </nz-form-item>
+              </div>
+
+              <div nz-col nzSpan="12">
+                <nz-form-item>
+                  <label class="form-label">Місто</label>
+                  <div>
+                    <nz-select
+                    name="city"
+                    nzShowSearch
+                    [(ngModel)]="currentService.current.city"
+                    nzNotFoundContent="Немає результатів"
+                    nzPlaceHolder="Оберіть місто...">
+                      <nz-option *ngFor="let city of cityData[selectedCountry]" [nzValue]="city" [nzLabel]="city"></nz-option>
+                    </nz-select>
+                  </div>
+                </nz-form-item>
+              </div>
+            </div>
+            <button
+            [disabled]="!settings.valid || !settings.dirty"
+            nz-button
+            nzSize="large"
+            [nzType]="'primary'"
+            type="submit">Зберегти</button>
+          </form>
         </div>
-        <button
-        [disabled]="!settings.valid"
-        nz-button
-        nzSize="large"
-        [nzType]="'primary'"
-        type="submit">Зберегти</button>
-      </form>
 
-      <nz-divider></nz-divider>
+        <div nz-col nzSpan="24" nzXl="12">
+          <nz-divider class="hidden-xl"></nz-divider>
 
-      <nz-alert *ngIf="passwordChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Новий пароль успішно збережено." nzShowIcon></nz-alert>
+          <nz-alert *ngIf="passwordChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Новий пароль успішно збережено." nzShowIcon></nz-alert>
 
-      <h2>Зміна паролю</h2>
-      <form
-      [formGroup]="newPassForm"
-      nz-form
-      (submit)="submitForm(password, newPassForm)"
-      nzLayout="verical">
-        <nz-form-item>
-          <label class="form-label">Пароль</label>
-          <nz-form-control [attr.class]="updateUser.wrongPassword ? 'is-invalid' : null">
-            <nz-input-group nzPrefixIcon="anticon anticon-lock">
-              <input
-              nz-input
-              name="password"
-              [(ngModel)]="password"
-              type="password"
-              placeholder="*******"
-              [ngModelOptions]="{standalone: true}">
-            </nz-input-group>
-            <nz-form-explain *ngIf="updateUser.wrongPassword">Пароль невірний.</nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
+          <h2>Зміна паролю</h2>
+          <form
+          [formGroup]="newPassForm"
+          nz-form
+          (submit)="updatePassword(password, newPassForm)"
+          nzLayout="verical">
+            <nz-form-item>
+              <label class="form-label">Пароль</label>
+              <nz-form-control [attr.class]="updateUser.wrongPassword ? 'is-invalid' : null">
+                <nz-input-group nzPrefixIcon="anticon anticon-lock">
+                  <input
+                  nz-input
+                  name="password"
+                  [(ngModel)]="password"
+                  type="password"
+                  placeholder="*******"
+                  [ngModelOptions]="{standalone: true}">
+                </nz-input-group>
+                <nz-form-explain *ngIf="updateUser.wrongPassword">Пароль невірний.</nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
 
-        <nz-form-item>
-          <label class="form-label">Новий пароль</label>
-          <nz-form-control nzHasFeedback>
-            <nz-input-group nzPrefixIcon="anticon anticon-lock">
-              <input
-              nz-input
-              formControlName="newPassword"
-              type="password"
-              required
-              placeholder="*******">
-            </nz-input-group>
-            <nz-form-explain *ngIf="newPassForm.get('newPassword').dirty && newPassForm.get('newPassword').errors"> {{ minLengthError("паролю", passMinLength, passMaxLength) }} </nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
+            <nz-form-item>
+              <label class="form-label">Новий пароль</label>
+              <nz-form-control nzHasFeedback>
+                <nz-input-group nzPrefixIcon="anticon anticon-lock">
+                  <input
+                  nz-input
+                  formControlName="newPassword"
+                  type="password"
+                  required
+                  placeholder="*******">
+                </nz-input-group>
+                <nz-form-explain *ngIf="newPassForm.get('newPassword').dirty && newPassForm.get('newPassword').errors"> {{ minLengthError("паролю", passMinLength, passMaxLength) }} </nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
 
-        <nz-form-item>
-          <label class="form-label">Повторіть новий пароль</label>
-          <nz-form-control nzHasFeedback>
-            <nz-input-group nzPrefixIcon="anticon anticon-lock">
-              <input
-              nz-input
-              formControlName="passwordConfirm"
-              type="password"
-              required
-              placeholder="*******">
-            </nz-input-group>
-            <nz-form-explain *ngIf="newPassForm.get('passwordConfirm').dirty && newPassForm.get('passwordConfirm').errors || isControlInvalid('passwordConfirm')" class="input-group__message"> {{ passwordNotEqual }} </nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
+            <nz-form-item>
+              <label class="form-label">Повторіть новий пароль</label>
+              <nz-form-control nzHasFeedback>
+                <nz-input-group nzPrefixIcon="anticon anticon-lock">
+                  <input
+                  nz-input
+                  formControlName="passwordConfirm"
+                  type="password"
+                  required
+                  placeholder="*******">
+                </nz-input-group>
+                <nz-form-explain *ngIf="newPassForm.get('passwordConfirm').dirty && newPassForm.get('passwordConfirm').errors || isControlInvalid('passwordConfirm')" class="input-group__message"> {{ passwordNotEqual }} </nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
 
-        <button
-        nz-button
-        [disabled]="!newPassForm.valid"
-        nzSize="large"
-        [nzType]="'primary'"
-        type="submit">Змінити</button>
-      </form>
+            <button
+            nz-button
+            [disabled]="!newPassForm.valid"
+            nzSize="large"
+            [nzType]="'primary'"
+            type="submit">Змінити</button>
+          </form>
+        </div>
+      </div>
     </nz-content>
   </nz-layout>
 </nz-layout>

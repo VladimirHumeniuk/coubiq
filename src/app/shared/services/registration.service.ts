@@ -27,17 +27,17 @@ export class RegistrationService {
       photoURL: ''
     }).then((() => {
       this.db.object(`${this.usersRef}/${uid}`).set({
+        key: uid,
         username: user.username,
         email: user.email,
-        password: user.password,
         country: user.country,
         city: user.city
       })
     }))
   };
 
-  createUser(user: User) {
-    this.authFb.auth.createUserWithEmailAndPassword(user.email, user.password)
+  createUser(user: User, password: string) {
+    this.authFb.auth.createUserWithEmailAndPassword(user.email, password)
       .then((user$) => {
         this.user = user$;
 
@@ -57,11 +57,10 @@ export class RegistrationService {
     const user: User = {
       username: formData.username,
       email: formData.email,
-      password: formData.password,
       country: country,
       city: city
     }
 
-    this.createUser(user);
+    this.createUser(user, formData.password);
   }
 }

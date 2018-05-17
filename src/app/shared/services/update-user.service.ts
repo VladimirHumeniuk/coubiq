@@ -74,8 +74,6 @@ export class UpdateUserService {
   }
 
   updateUserData(uid: string, user: User, oldEmail: string) {
-    console.log(uid, user, oldEmail, this.currentService.current.password)
-
     this.updateUsername(uid, user.username);
     this.changeLocation(uid, user.country, user.city);
 

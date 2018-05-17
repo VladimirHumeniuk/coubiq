@@ -1,0 +1,5 @@
+.hidden-xl {
+  @media (min-width: $xl) {
+    display: none;
+  }
+}

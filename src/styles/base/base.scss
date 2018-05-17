@@ -8,16 +8,16 @@ body {
   margin-left: auto;
   margin-right: auto;
 
-  @media (min-width: $s) {
+  @media (min-width: $md) {
     width: 750px;
   }
 
-  @media (min-width: $m) {
+  @media (min-width: $lg) {
     width: 970px;
   }
 
-  @media (min-width: $l) {
-    width: 1280px;
+  @media (min-width: $xl) {
+    width: 1200px;
   }
 }
 

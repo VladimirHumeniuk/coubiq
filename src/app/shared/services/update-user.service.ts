@@ -31,17 +31,6 @@ export class UpdateUserService {
     })
   }
 
-  changeEmail(uid: string, oldEmail: string, password: string, newEmail: string): void {
-    firebase.auth().signInWithEmailAndPassword(oldEmail, password)
-    .then((user) => {
-      user.updateEmail(newEmail);
-
-      this.db.object(`${this.userRef}/${uid}`).update({
-        email: newEmail
-      }).then(() => user.sendEmailVerification())
-    })
-  }
-
   changeLocation(uid: string, country: string, city: string) {
     this.db.object(`${this.userRef}/${uid}`).update({
       country: country,
@@ -73,12 +62,8 @@ export class UpdateUserService {
       });
   }
 
-  updateUserData(uid: string, user: User, oldEmail: string) {
+  updateUserData(uid: string, user: User) {
     this.updateUsername(uid, user.username);
     this.changeLocation(uid, user.country, user.city);
-
-    if (user.email !== oldEmail) {
-      this.changeEmail(uid, oldEmail, this.currentService.current.password, user.email)
-    }
   }
 }

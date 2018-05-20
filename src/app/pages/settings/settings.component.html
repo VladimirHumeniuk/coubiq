@@ -24,7 +24,6 @@
           (submit)="updateUserData(
             currentService.current.key,
             currentService.current.username,
-            currentService.current.email,
             currentService.current.country,
             currentService.current.city
           );"
@@ -47,24 +46,6 @@
                   placeholder="Ім'я">
                 </nz-input-group>
                 <nz-form-explain *ngIf="username.invalid && !username.pristine">{{ minLengthError("імені", nameMinLength, nameMaxLength) }}</nz-form-explain>
-              </nz-form-control>
-            </nz-form-item>
-
-            <nz-form-item>
-              <label class="form-label">Емейл</label>
-              <nz-form-control nzHasFeedback>
-                <nz-input-group nzPrefixIcon="anticon anticon-mail">
-                  <input
-                  nz-input
-                  #email="ngModel"
-                  name="email"
-                  type="email"
-                  pattern="{{ emailRegex }}"
-                  required
-                  [(ngModel)]="currentService.current.email"
-                  placeholder="Емейл">
-                </nz-input-group>
-                <nz-form-explain *ngIf="email.invalid && !email.pristine">{{ invalidEmail }}</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
 

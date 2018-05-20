@@ -22,9 +22,6 @@ export class SettingsComponent implements OnInit {
   protected passMinLength: number = 6;
   protected passMaxLength: number = 30;
 
-  public emailRegex = "[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})";
-
-  public invalidEmail: string = 'Емейл не дійсний.';
   public passwordNotEqual: string = 'Паролі не співпадають.';
   public noCitySelected: string = 'Оберіть місто.';
 
@@ -34,7 +31,6 @@ export class SettingsComponent implements OnInit {
   public cityData = {
     Україна: Object.values(CitiesUa)
   };
-  public currentEmail: string;
   public dataChanged: boolean = false;
 
   public newPassForm: FormGroup;
@@ -48,13 +44,7 @@ export class SettingsComponent implements OnInit {
     private fb: FormBuilder,
     public currentService: CurrentService,
     public updateUser: UpdateUserService
-  ) {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.currentEmail = user.email;
-      }
-    });
-  }
+  ) { }
 
   initPassForm() {
     this.newPassForm = this.fb.group({
@@ -73,19 +63,17 @@ export class SettingsComponent implements OnInit {
   updateUserData(
     uid: string,
     username: string,
-    email: string,
     country: string,
     city: string
   ): void {
 
     const user: User = {
       username: username,
-      email: email,
       country: country,
       city: city
     };
 
-    this.updateUser.updateUserData(uid, user, this.currentEmail);
+    this.updateUser.updateUserData(uid, user);
     this.dataChanged = true;
   }
 
@@ -111,7 +99,7 @@ export class SettingsComponent implements OnInit {
       this.password = null;
       this.updateUser.updatePass(password, form);
 
-      this.password = null;
+      this.passwordChanged = true;
     }
   }
 

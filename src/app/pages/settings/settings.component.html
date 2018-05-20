@@ -29,7 +29,7 @@
           );"
           nz-form
           nzLayout="verical">
-          <nz-spin [nzSpinning]="!currentService.current.key"></nz-spin>
+          <nz-spin [nzSpinning]="!currentService.current.key">
             <nz-form-item>
               <label class="form-label">Ім'я</label>
               <nz-form-control nzHasFeedback>
@@ -85,6 +85,7 @@
             nzSize="large"
             [nzType]="'primary'"
             type="submit">Зберегти</button>
+          </nz-spin>
           </form>
         </div>
 

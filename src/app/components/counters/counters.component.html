@@ -1,2 +1,141 @@
 <h1>Мої лічильники</h1>
 <p>Налаштування тарифів по лічильникам.</p>
+
+<nz-divider></nz-divider>
+
+<form>
+  <div nz-row nzGutter="32">
+
+    <div nz-col nzSpan="24" nzXl="12">
+      <h2>Основні лічильники</h2>
+
+      <nz-form-item>
+        <label class="form-label">Електроенергія</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="коп. за 1 кВт">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Газ</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. за 1 м&#179;">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Холодне водопостачання</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. за 1 м&#179;">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Гаряче водопостачання</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. за 1 м&#179;">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Опалення</label>
+        <label class="mb-1" nz-checkbox>З лічильником</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. за 1 Гкал">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col nzSpan="24" nzXl="12">
+      <h2>Додатково</h2>
+
+      <nz-form-item>
+        <label class="form-label">Інтернет</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. на місяць">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Телефон</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. на місяць">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Житлово-комунальні послуги</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. на місяць">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Інше</label>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzAddOnAfter="грн. на місяць">
+            <nz-input-number
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <button
+  nz-button
+  nzSize="large"
+  [nzType]="'primary'"
+  type="submit">Зберегти</button>
+</form>

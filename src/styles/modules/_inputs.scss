@@ -65,3 +65,17 @@
     z-index: 1;
   }
 }
+
+.ant-input-number-lg {
+  width: 100%;
+  border-radius: 4px 0 0 4px;
+  padding-right: 20px;
+
+  input {
+    text-align: right;
+  }
+}
+
+.ant-input-group-addon:last-child {
+  width: 110px;
+}

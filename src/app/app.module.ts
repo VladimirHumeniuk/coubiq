@@ -32,6 +32,9 @@ import { CurrentService } from './shared/services/current.service';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { UpdateUserService } from './shared/services/update-user.service';
+import { MyCountersComponent } from './pages/my-counters/my-counters.component';
+import { AsideComponent } from './components/aside/aside.component';
+import { CountersComponent } from './components/counters/counters.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { UpdateUserService } from './shared/services/update-user.service';
     NavbarComponent,
     SignUpComponent,
     SignInComponent,
-    SettingsComponent
+    SettingsComponent,
+    MyCountersComponent,
+    AsideComponent,
+    CountersComponent
   ],
   imports: [
     AppRoutingModule,

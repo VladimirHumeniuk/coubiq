@@ -1,0 +1,14 @@
+.aside {
+  padding: 40px 0;
+}
+
+.aside-link {
+  display: block;
+  padding: 10px 40px;
+  border-right: 2px solid transparent;
+
+  &.is-active {
+    background-color: #e6f7ff;
+    border-color: var(--c-primary);
+  }
+}

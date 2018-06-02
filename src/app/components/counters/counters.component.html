@@ -4,8 +4,8 @@
 <nz-divider></nz-divider>
 
 <form [formGroup]="counters" (submit)="saveCounter(currentService.current.key, counters)">
+  <nz-spin [nzSpinning]="countersService.counters == null">
   <div nz-row nzGutter="32">
-
     <nz-alert *ngIf="dataChanged" nz-col class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Нові дані успішно збережено." nzShowIcon></nz-alert>
 
     <div nz-col nzSpan="24" nzXl="12">
@@ -167,4 +167,5 @@
   [nzType]="'primary'"
   [disabled]="!counters.dirty"
   type="submit">Зберегти</button>
+  </nz-spin>
 </form>

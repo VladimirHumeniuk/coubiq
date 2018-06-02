@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { CurrentService } from '../../shared/services/current.service';
 import { Counters } from '../../shared/interfaces/counters';
+import { CountersService } from '../../shared/services/counters.service';
 
 @Component({
   selector: 'app-counters',
@@ -22,7 +23,8 @@ export class CountersComponent implements OnInit {
   constructor(
     private db: AngularFireDatabase,
     private fb: FormBuilder,
-    public currentService: CurrentService
+    public currentService: CurrentService,
+    public countersService: CountersService
   ) { }
 
   initCountersForm() {
@@ -74,6 +76,7 @@ export class CountersComponent implements OnInit {
       heating: formData.heating,
       withCounter: this.withCounter,
       houseroom: formData.houseroom,
+      internet: formData.internet,
       phone: formData.phone,
       services: formData.services,
       other: formData.other
@@ -86,5 +89,19 @@ export class CountersComponent implements OnInit {
 
   ngOnInit() {
     this.initCountersForm();
+
+    this.countersService.getCounters
+    .subscribe((value) => this.counters.setValue({
+      'electricity': value.electricity,
+      'gas': value.gas,
+      'coldWater': value.coldWater,
+      'hotWater': value.hotWater,
+      'heating': value.heating,
+      'houseroom': value.houseroom,
+      'internet': value.internet,
+      'phone': value.phone,
+      'services': value.services,
+      'other': value.other
+    }));
   }
 }

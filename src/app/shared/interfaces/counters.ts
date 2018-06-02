@@ -6,6 +6,7 @@ export interface Counters {
   heating: number;
   withCounter: boolean;
   houseroom?: number;
+  internet?: number;
   phone?: number;
   services?: number;
   other?: number;

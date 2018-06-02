@@ -7,3 +7,6 @@ nz-spin {
   height: 100%;
 }
 
+.ant-spin-nested-loading > div > .ant-spin {
+  max-height: 100%;
+}

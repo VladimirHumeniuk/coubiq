@@ -58,7 +58,7 @@ export class CountersComponent implements OnInit {
     })
   }
 
-  saveCounter(uid: string, form: any) {
+  saveCounter(uid: string, isWithCounter: boolean = this.withCounter, form: any) {
     const controls = form.controls;
 
     let formData = Object.assign({});
@@ -70,6 +70,7 @@ export class CountersComponent implements OnInit {
       coldWater: formData.coldWater,
       hotWater: formData.hotWater,
       heating: formData.heating,
+      withCounter: isWithCounter,
       houseroom: formData.houseroom,
       phone: formData.phone,
       services: formData.services,

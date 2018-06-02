@@ -17,6 +17,8 @@ export class CountersComponent implements OnInit {
 
   public withCounter: boolean = true;
 
+  public dataChanged: boolean = false;
+
   constructor(
     private db: AngularFireDatabase,
     private fb: FormBuilder,
@@ -58,7 +60,7 @@ export class CountersComponent implements OnInit {
     })
   }
 
-  saveCounter(uid: string, isWithCounter: boolean = this.withCounter, form: any) {
+  saveCounter(uid: string, form: any) {
     const controls = form.controls;
 
     let formData = Object.assign({});
@@ -70,12 +72,14 @@ export class CountersComponent implements OnInit {
       coldWater: formData.coldWater,
       hotWater: formData.hotWater,
       heating: formData.heating,
-      withCounter: isWithCounter,
+      withCounter: this.withCounter,
       houseroom: formData.houseroom,
       phone: formData.phone,
       services: formData.services,
       other: formData.other
     };
+
+    this.dataChanged = true;
 
     this.db.object(`${this.userRef}/${uid}/counters`).update(counters);
   }

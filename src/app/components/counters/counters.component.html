@@ -3,7 +3,7 @@
 
 <nz-divider></nz-divider>
 
-<form>
+<form [formGroup]="counters">
   <div nz-row nzGutter="32">
 
     <div nz-col nzSpan="24" nzXl="12">
@@ -11,9 +11,10 @@
 
       <nz-form-item>
         <label class="form-label">Електроенергія</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="коп. за 1 кВт">
             <nz-input-number
+            formControlName="electricity"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="0.1">
@@ -24,9 +25,10 @@
 
       <nz-form-item>
         <label class="form-label">Газ</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. за 1 м&#179;">
             <nz-input-number
+            formControlName="gas"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="0.1">
@@ -37,9 +39,10 @@
 
       <nz-form-item>
         <label class="form-label">Холодне водопостачання</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. за 1 м&#179;">
             <nz-input-number
+            formControlName="coldWater"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="0.1">
@@ -50,9 +53,10 @@
 
       <nz-form-item>
         <label class="form-label">Гаряче водопостачання</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. за 1 м&#179;">
             <nz-input-number
+            formControlName="hotWater"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="0.1">
@@ -63,10 +67,28 @@
 
       <nz-form-item>
         <label class="form-label">Опалення</label>
-        <label class="mb-1" nz-checkbox>З лічильником</label>
-        <nz-form-control nzHasFeedback>
-          <nz-input-group nzAddOnAfter="грн. за 1 Гкал">
+        <label class="mb-1"
+        [(ngModel)]="withCounter"
+        [ngModelOptions]="{standalone: true}"
+        nz-checkbox>З лічильником</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="{{ withCounter? 'грн. за 1 Гкал' : 'грн. за м&#178;'}}">
             <nz-input-number
+            formControlName="heating"
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item *ngIf="!withCounter">
+        <label class="form-label">Житлова площа</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="м&#178;">
+            <nz-input-number
+            formControlName="houseroom"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="0.1">
@@ -81,9 +103,10 @@
 
       <nz-form-item>
         <label class="form-label">Інтернет</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. на місяць">
             <nz-input-number
+            formControlName="internet"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="1">
@@ -94,9 +117,10 @@
 
       <nz-form-item>
         <label class="form-label">Телефон</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. на місяць">
             <nz-input-number
+            formControlName="phone"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="1">
@@ -107,9 +131,10 @@
 
       <nz-form-item>
         <label class="form-label">Житлово-комунальні послуги</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. на місяць">
             <nz-input-number
+            formControlName="services"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="1">
@@ -120,9 +145,10 @@
 
       <nz-form-item>
         <label class="form-label">Інше</label>
-        <nz-form-control nzHasFeedback>
+        <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. на місяць">
             <nz-input-number
+            formControlName="other"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="1">
@@ -137,5 +163,6 @@
   nz-button
   nzSize="large"
   [nzType]="'primary'"
+  [disabled]="!counters.dirty"
   type="submit">Зберегти</button>
 </form>

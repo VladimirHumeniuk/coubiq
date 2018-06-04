@@ -8,7 +8,8 @@ import { DashboardComponent } from './dashboard.component';
 const routes: Routes = [
   {
     path: "",
-    component: DashboardComponent
+    redirectTo: "my-counters",
+    pathMatch: "full"
   },
   {
     path: "settings",

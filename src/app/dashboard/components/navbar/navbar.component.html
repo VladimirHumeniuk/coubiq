@@ -9,7 +9,7 @@
         {{ (currService.user | async)?.username }}
       </a>
       <ul class="dropdown-collapse" nz-menu>
-        <li routerLink="/settings" nz-menu-item><i class="anticon anticon-setting"></i> Мої налаштування</li>
+        <li routerLink="/dashboard/settings" nz-menu-item><i class="anticon anticon-setting"></i> Мої налаштування</li>
         <li nz-menu-divider></li>
         <li nz-menu-item (click)="logout()"><i class="anticon anticon-logout"></i> Вийти</li>
       </ul>

@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { User } from '../interfaces/user';
-import { CurrentService } from './current.service';
+import { User } from '../../shared/interfaces/user';
+import { CurrentService } from '../../shared/services/current.service';
 
 @Injectable()
 export class UpdateUserService {

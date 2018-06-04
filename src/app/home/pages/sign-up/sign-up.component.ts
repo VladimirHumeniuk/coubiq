@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RegistrationService } from "../../shared/services/registration.service";
-import { EqualValidator } from '../../shared/directives/validate-equal.directive';
-import { Countries } from '../../shared/enums/countries.enum';
-import { CitiesUa } from '../../shared/enums/cities-ua.enum';
+import { RegistrationService } from "../../services/registration.service";
+import { EqualValidator } from '../../../shared/directives/validate-equal.directive';
+import { Countries } from '../../../shared/enums/countries.enum';
+import { CitiesUa } from '../../../shared/enums/cities-ua.enum';
 
 @Component({
   selector: 'app-sign-up',

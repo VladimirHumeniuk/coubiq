@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { CurrentService } from '../../shared/services/current.service';
-import { Counters } from '../../shared/interfaces/counters';
-import { CountersService } from '../../shared/services/counters.service';
+import { CurrentService } from '../../../shared/services/current.service';
+import { Counters } from '../../../shared/interfaces/counters';
+import { CountersService } from '../../services/counters.service';
 
 @Component({
   selector: 'app-counters',

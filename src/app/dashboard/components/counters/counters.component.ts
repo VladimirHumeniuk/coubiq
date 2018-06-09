@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { CurrentService } from '../../shared/services/current.service';
-import { Counters } from '../../shared/interfaces/counters';
-import { CountersService } from '../../shared/services/counters.service';
+import { CurrentService } from '../../../shared/services/current.service';
+import { Counters } from '../../../shared/interfaces/counters';
+import { CountersService } from '../../services/counters.service';
 
 @Component({
   selector: 'app-counters',
@@ -15,8 +15,6 @@ import { CountersService } from '../../shared/services/counters.service';
 export class CountersComponent implements OnInit {
   protected userRef: string = 'users';
   public counters: FormGroup;
-
-  public withCounter: boolean = true;
 
   public dataChanged: boolean = false;
 
@@ -41,6 +39,7 @@ export class CountersComponent implements OnInit {
       hotWater: ['0', [
         Validators.min(0)
       ]],
+      withCounter: [''],
       heating: ['0', [
         Validators.min(0)
       ]],
@@ -74,7 +73,7 @@ export class CountersComponent implements OnInit {
       coldWater: formData.coldWater,
       hotWater: formData.hotWater,
       heating: formData.heating,
-      withCounter: this.withCounter,
+      withCounter: formData.withCounter,
       houseroom: formData.houseroom,
       internet: formData.internet,
       phone: formData.phone,
@@ -91,17 +90,22 @@ export class CountersComponent implements OnInit {
     this.initCountersForm();
 
     this.countersService.getCounters
-    .subscribe((value) => this.counters.setValue({
-      'electricity': value.electricity,
-      'gas': value.gas,
-      'coldWater': value.coldWater,
-      'hotWater': value.hotWater,
-      'heating': value.heating,
-      'houseroom': value.houseroom,
-      'internet': value.internet,
-      'phone': value.phone,
-      'services': value.services,
-      'other': value.other
-    }));
+    .subscribe((value) => {
+      if (Object.keys(value).length !== 0) {
+        this.counters.setValue({
+          'electricity': value.electricity,
+          'gas': value.gas,
+          'coldWater': value.coldWater,
+          'hotWater': value.hotWater,
+          'withCounter': value.withCounter,
+          'heating': value.heating,
+          'houseroom': value.houseroom,
+          'internet': value.internet,
+          'phone': value.phone,
+          'services': value.services,
+          'other': value.other
+        })
+      }
+    });
   }
 }

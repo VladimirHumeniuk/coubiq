@@ -1,11 +1,9 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './pages/home/home.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { MyCountersComponent } from './pages/my-counters/my-counters.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -21,12 +19,8 @@ const routes: Routes = [
     component: SignUpComponent
   },
   {
-    path: "settings",
-    component: SettingsComponent
-  },
-  {
-    path: "my-counters",
-    component: MyCountersComponent
+    path: "dashboard",
+    loadChildren: "../dashboard/dashboard.module#DashboardModule"
   }
 ];
 
@@ -34,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class CoreRoutingModule { }

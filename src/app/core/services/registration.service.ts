@@ -7,7 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
-import { User } from '../interfaces/user';
+import { User } from '../../shared/interfaces/user';
 
 @Injectable()
 export class RegistrationService {

@@ -70,11 +70,10 @@
       <nz-form-item>
         <label class="form-label">Опалення</label>
         <label class="mb-1"
-        [(ngModel)]="withCounter"
-        [ngModelOptions]="{standalone: true}"
+        formControlName="withCounter"
         nz-checkbox>З лічильником</label>
         <nz-form-control>
-          <nz-input-group nzAddOnAfter="{{ withCounter? 'грн. за 1 Гкал' : 'грн. за м&#178;'}}">
+          <nz-input-group nzAddOnAfter="{{ counters.controls['withCounter'].value == true ? 'грн. за 1 Гкал' : 'грн. за м&#178;'}}">
             <nz-input-number
             formControlName="heating"
             [nzMin]="0"
@@ -85,7 +84,7 @@
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item *ngIf="!withCounter">
+      <nz-form-item *ngIf="counters.controls['withCounter'].value !== true">
         <label class="form-label">Житлова площа</label>
         <nz-form-control>
           <nz-input-group nzAddOnAfter="м&#178;">

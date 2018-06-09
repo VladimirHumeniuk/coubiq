@@ -1,14 +1,14 @@
-import { CitiesUa } from './../../shared/enums/cities-ua.enum';
-import { Countries } from './../../shared/enums/countries.enum';
-import { CurrentService } from './../../shared/services/current.service';
+import { CitiesUa } from '../../../shared/enums/cities-ua.enum';
+import { Countries } from '../../../shared/enums/countries.enum';
+import { CurrentService } from '../../../shared/services/current.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { UpdateUserService } from '../../shared/services/update-user.service';
+import { UpdateUserService } from '../../services/update-user.service';
 import * as firebase from 'firebase/app';
 import { NzCollapseModule } from 'ng-zorro-antd';
-import { User } from '../../shared/interfaces/user';
+import { User } from '../../../shared/interfaces/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EqualValidator } from '../../shared/directives/validate-equal.directive';
+import { EqualValidator } from '../../../shared/directives/validate-equal.directive';
 
 @Component({
   selector: 'app-settings',

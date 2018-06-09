@@ -1,7 +1,7 @@
-import { User } from './../interfaces/user';
-import { Counters } from './../interfaces/counters';
+import { User } from '../../shared/interfaces/user';
+import { Counters } from '../../shared/interfaces/counters';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../shared/services/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';

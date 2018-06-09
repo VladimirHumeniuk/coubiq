@@ -33,6 +33,10 @@ body {
   border-bottom: 1px solid var(--c-light-gray);
 }
 
+.ant-layout-footer {
+  border-top: 1px solid var(--c-light-gray);
+}
+
 .ant-layout-content {
   padding: 40px 64px 80px;
   background-color: #fff;

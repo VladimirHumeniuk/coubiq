@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: "sign-in",
-    loadChildren: "../core/core.module#SignInComponent"
+    loadChildren: "../core/core.module#CoreModule"
   },
   {
     path: "sign-up",
-    loadChildren: "../core/core.module#SignUpComponent"
+    loadChildren: "../core/core.module#CoreModule"
   }
 ];
 

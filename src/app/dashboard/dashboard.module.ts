@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { CountersService } from './services/counters.service';
 import { AuthService } from './../shared/services/auth.service';
 import { NgModule } from '@angular/core';
@@ -16,13 +17,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
 
-// 3rd party modules
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
-// Components
-import { NavbarComponent } from './components/navbar/navbar.component';
-
-// Pages
 import { CurrentService } from '../shared/services/current.service';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
@@ -35,7 +31,6 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     DashboardComponent,
-    NavbarComponent,
     SettingsComponent,
     MyCountersComponent,
     AsideComponent,
@@ -50,7 +45,8 @@ import { CommonModule } from '@angular/common';
     NgZorroAntdModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    SharedModule
   ],
   providers: [
     AuthService,

@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { CoreRoutingModule } from './core-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,6 +22,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AuthService } from '../shared/services/auth.service';
 import { CurrentService } from '../shared/services/current.service';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   imports: [
@@ -32,14 +34,16 @@ import { AuthGuard } from '../shared/guards/auth.guard';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    SharedModule
   ],
   exports: [
     RouterModule
   ],
   declarations: [
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    HomeComponent
   ],
   providers: [
     RegistrationService,

@@ -1,0 +1,68 @@
+<nz-layout>
+  <nz-header>
+    <app-navbar></app-navbar>
+  </nz-header>
+
+  <nz-layout>
+    <nz-content class="pattern-bg">
+
+      <main nz-row nzGutter="16" class="home-header">
+        <div nz-col class="gutter-row" nzSpan="12">
+          <div class="home-box home-box--primary home-box--title">
+            <h1 class="home-heading">
+              Калькулятор
+              <span class="home-subheading">комунальних платежів</span>
+            </h1>
+          </div>
+
+          <div class="home-box home-box--subtitle">
+            <p>
+              З радістю допоможемо зібрати та порахувати вартість ваших комунальних послуг, але сплатити доведеться вам.
+            </p>
+            <a
+            routerLink="/sign-up"
+            nz-button
+            nzSize="large"
+            nzType="primary">
+              Зареєструватися
+            </a>
+          </div>
+        </div>
+
+        <div nz-col class="gutter-row" nzSpan="12">
+          <div class="home-image">
+            <div class="home-image__image"></div>
+          </div>
+        </div>
+      </main>
+
+      <section nz-row nzGutter="16" class="features">
+        <div nz-col class="gutter-row" nzSpan="8">
+          <div class="feature-item">
+            <i class="anticon anticon-calculator"></i>
+            <h2 class="feature-item__title">Розрахунок вартості</h2>
+          </div>
+        </div>
+
+        <div nz-col class="gutter-row" nzSpan="8">
+          <div class="feature-item">
+            <i class="anticon anticon-table"></i>
+            <h2 class="feature-item__title">Історія підрахунків</h2>
+          </div>
+        </div>
+
+        <div nz-col class="gutter-row" nzSpan="8">
+          <div class="feature-item">
+            <i class="anticon anticon-line-chart"></i>
+            <h2 class="feature-item__title">Порівняння витрат</h2>
+          </div>
+        </div>
+      </section>
+
+    </nz-content>
+  </nz-layout>
+
+  <nz-footer>
+    dsds
+  </nz-footer>
+</nz-layout>

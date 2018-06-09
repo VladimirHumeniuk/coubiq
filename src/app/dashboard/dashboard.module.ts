@@ -21,7 +21,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { CurrentService } from '../shared/services/current.service';
 import { SettingsComponent } from './pages/settings/settings.component';
-import { AuthGuard } from '../shared/guards/auth.guard';
+import { isUser, isGuest } from '../shared/guards/auth.guard';
 import { UpdateUserService } from './services/update-user.service';
 import { MyCountersComponent } from './pages/my-counters/my-counters.component';
 import { AsideComponent } from './components/aside/aside.component';
@@ -52,7 +52,8 @@ import { CommonModule } from '@angular/common';
     AuthService,
     CurrentService,
     CountersService,
-    AuthGuard,
+    isUser,
+    isGuest,
     UpdateUserService
   ]
 })

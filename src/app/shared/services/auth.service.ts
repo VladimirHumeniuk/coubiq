@@ -76,7 +76,8 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.authFb.auth.signOut();
-    this.router.navigate(['/']);
+    this.authFb.auth.signOut().then(() => {
+      this.router.navigate(['/']);
+    });
   }
 }

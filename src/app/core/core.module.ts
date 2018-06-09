@@ -21,7 +21,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { AuthService } from '../shared/services/auth.service';
 import { CurrentService } from '../shared/services/current.service';
-import { AuthGuard } from '../shared/guards/auth.guard';
+import { isUser, isGuest } from '../shared/guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
@@ -49,7 +49,8 @@ import { HomeComponent } from './pages/home/home.component';
     RegistrationService,
     AuthService,
     CurrentService,
-    AuthGuard
+    isUser,
+    isGuest
   ]
 })
 export class CoreModule { }

@@ -12,6 +12,7 @@ import { CountersService } from '../../services/counters.service';
   templateUrl: './counters.component.html',
   styleUrls: ['./counters.component.scss']
 })
+
 export class CountersComponent implements OnInit {
   protected userRef: string = 'users';
   public counters: FormGroup;
@@ -91,7 +92,7 @@ export class CountersComponent implements OnInit {
 
     this.countersService.getCounters
     .subscribe((value) => {
-      if (Object.keys(value).length !== 0) {
+      if (value && Object.keys(value).length !== 0) {
         this.counters.setValue({
           'electricity': value.electricity,
           'gas': value.gas,

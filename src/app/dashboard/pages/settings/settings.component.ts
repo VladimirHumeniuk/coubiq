@@ -4,11 +4,10 @@ import { CurrentService } from '../../../shared/services/current.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UpdateUserService } from '../../services/update-user.service';
-import * as firebase from 'firebase/app';
-import { NzCollapseModule } from 'ng-zorro-antd';
 import { User } from '../../../shared/interfaces/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EqualValidator } from '../../../shared/directives/validate-equal.directive';
+import { MessagesService } from '../../../shared/services/messages.service';
 
 @Component({
   selector: 'app-settings',
@@ -31,11 +30,9 @@ export class SettingsComponent implements OnInit {
   public cityData = {
     Україна: Object.values(CitiesUa)
   };
-  public dataChanged: boolean = false;
 
   public newPassForm: FormGroup;
   public password: string;
-  public passwordChanged: boolean = false;
 
   public current;
 
@@ -43,7 +40,8 @@ export class SettingsComponent implements OnInit {
     public db: AngularFireDatabase,
     private fb: FormBuilder,
     public currentService: CurrentService,
-    public updateUser: UpdateUserService
+    public updateUser: UpdateUserService,
+    private messagesServices: MessagesService
   ) { }
 
   initPassForm() {
@@ -73,8 +71,7 @@ export class SettingsComponent implements OnInit {
       city: city
     };
 
-    this.updateUser.updateUserData(uid, user);
-    this.dataChanged = true;
+    this.updateUser.updateUserData(uid, user)
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -98,8 +95,6 @@ export class SettingsComponent implements OnInit {
     if (this.newPassForm.valid) {
       this.password = null;
       this.updateUser.updatePass(password, form);
-
-      this.passwordChanged = true;
     }
   }
 

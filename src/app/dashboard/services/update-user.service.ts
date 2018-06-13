@@ -6,6 +6,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { User } from '../../shared/interfaces/user';
 import { CurrentService } from '../../shared/services/current.service';
+import { MessagesService } from './../../shared/services/messages.service';
+
 
 @Injectable()
 export class UpdateUserService {
@@ -17,7 +19,8 @@ export class UpdateUserService {
   constructor(
     private authFb: AngularFireAuth,
     private currentService: CurrentService,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private messagesService: MessagesService
   ) { }
 
   updateUsername(uid: string, username: string): void {
@@ -31,7 +34,7 @@ export class UpdateUserService {
     })
   }
 
-  changeLocation(uid: string, country: string, city: string) {
+  changeLocation(uid: string, country: string, city: string): void {
     this.db.object(`${this.userRef}/${uid}`).update({
       country: country,
       city: city
@@ -49,12 +52,13 @@ export class UpdateUserService {
     user.reauthenticateWithCredential(credentials)
       .then(() => {
         this.wrongPassword = false;
+        this.messagesService.createMessage('success', "Пароль успішно змінений.")
 
         this.authFb.auth.currentUser.updatePassword(formData.newPassword).then(function() {
 
           form.reset()
-        }).catch(function(error) {
-          console.log(error)
+        }).catch((error) => {
+          this.messagesService.createMessage('error', 'Виникла помилка при збереженні. Спробуйте пізніше.')
         });
       })
       .catch((error) => {
@@ -62,8 +66,10 @@ export class UpdateUserService {
       });
   }
 
-  updateUserData(uid: string, user: User) {
+  updateUserData(uid: string, user: User): void {
     this.updateUsername(uid, user.username);
     this.changeLocation(uid, user.country, user.city);
+
+    this.messagesService.createMessage('success', "Нові дані успішно збережені.")
   }
 }

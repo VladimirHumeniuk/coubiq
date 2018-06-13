@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 import { CurrentService } from '../../../shared/services/current.service';
 import { Counters } from '../../../shared/interfaces/counters';
 import { CountersService } from '../../services/counters.service';
+import { MessagesService } from '../../../shared/services/messages.service';
 
 @Component({
   selector: 'app-counters',
@@ -17,13 +18,12 @@ export class CountersComponent implements OnInit {
   protected userRef: string = 'users';
   public counters: FormGroup;
 
-  public dataChanged: boolean = false;
-
   constructor(
     private db: AngularFireDatabase,
     private fb: FormBuilder,
     public currentService: CurrentService,
-    public countersService: CountersService
+    public countersService: CountersService,
+    public messagesService: MessagesService
   ) { }
 
   initCountersForm() {
@@ -82,9 +82,9 @@ export class CountersComponent implements OnInit {
       other: formData.other
     };
 
-    this.dataChanged = true;
-
-    this.db.object(`${this.userRef}/${uid}/counters`).update(counters);
+    this.db.object(`${this.userRef}/${uid}/counters`).update(counters)
+      .then(() => this.messagesService.createMessage('success', 'Нові дані успішно збережені.'))
+      .catch(error => this.messagesService.createMessage('error', 'Виникла помилка при збереженні. Спробуйте пізніше.'))
   }
 
   ngOnInit() {

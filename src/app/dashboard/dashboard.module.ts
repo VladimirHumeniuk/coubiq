@@ -20,7 +20,7 @@ import { environment } from '../../environments/environment';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { CurrentService } from '../shared/services/current.service';
-import { SettingsComponent } from './pages/settings/settings.component';
+import { MessagesService } from './../shared/services/messages.service';
 import { isUser, isGuest } from '../shared/guards/auth.guard';
 import { UpdateUserService } from './services/update-user.service';
 import { MyCountersComponent } from './pages/my-counters/my-counters.component';
@@ -29,6 +29,7 @@ import { CountersComponent } from './components/counters/counters.component';
 import { CommonModule } from '@angular/common';
 import { MyCalculationsComponent } from './pages/my-calculations/my-calculations.component';
 import { CalculationsTableComponent } from './components/calculations-table/calculations-table.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CalculationsTableComponent } from './components/calculations-table/calc
     AuthService,
     CurrentService,
     CountersService,
+    MessagesService,
     isUser,
     isGuest,
     UpdateUserService

@@ -5,8 +5,6 @@
 
 <div nz-row nzGutter="32">
   <div nz-col nzSpan="24" nzXl="12">
-    <nz-alert *ngIf="dataChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Нові дані успішно збережено." nzShowIcon></nz-alert>
-
     <h2>Основна інформація</h2>
     <form
     #settings="ngForm"
@@ -80,9 +78,6 @@
 
   <div nz-col nzSpan="24" nzXl="12">
     <nz-divider class="hidden-xl"></nz-divider>
-
-    <nz-alert *ngIf="passwordChanged" class="mb-3" nzCloseText="&#215;" nzType="success" nzMessage="Новий пароль успішно збережено." nzShowIcon></nz-alert>
-
     <h2>Зміна паролю</h2>
     <form
     [formGroup]="newPassForm"

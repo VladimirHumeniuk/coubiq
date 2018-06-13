@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { MyCountersComponent } from './pages/my-counters/my-counters.component';
 import { DashboardComponent } from './dashboard.component';
-import { isUser, isGuest } from '../shared/guards/auth.guard';
+import { MyCalculationsComponent } from './pages/my-calculations/my-calculations.component';
 
 const routes: Routes = [
   {
@@ -25,7 +25,15 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [{
       path: "",
-      component: MyCountersComponent,
+      component: MyCountersComponent
+    }]
+  },
+  {
+    path: "my-calculations",
+    component: DashboardComponent,
+    children: [{
+      path: "",
+      component: MyCalculationsComponent
     }]
   }
 ];

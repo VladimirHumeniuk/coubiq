@@ -27,6 +27,8 @@ import { MyCountersComponent } from './pages/my-counters/my-counters.component';
 import { AsideComponent } from './components/aside/aside.component';
 import { CountersComponent } from './components/counters/counters.component';
 import { CommonModule } from '@angular/common';
+import { MyCalculationsComponent } from './pages/my-calculations/my-calculations.component';
+import { CalculationsTableComponent } from './components/calculations-table/calculations-table.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { CommonModule } from '@angular/common';
     SettingsComponent,
     MyCountersComponent,
     AsideComponent,
-    CountersComponent
+    CountersComponent,
+    MyCalculationsComponent,
+    CalculationsTableComponent
   ],
   imports: [
     CommonModule,

@@ -6,9 +6,34 @@
   display: block;
   padding: 10px 40px;
   border-right: 2px solid transparent;
+  white-space: nowrap;
+
+  &:focus {
+    text-decoration: none;
+  }
 
   &.is-active {
     background-color: #e6f7ff;
     border-color: var(--c-primary);
+  }
+
+  &--soon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    user-select: none;
+    opacity: .5;
+    padding: 10px 15px 10px 40px;
+
+    &::after {
+      content: "згодом";
+      display: inline-block;
+      background-color: var(--c-primary);
+      border-radius: 10px;
+      font-size: 12px;
+      padding: 2px 8px;
+      color: #fff;
+    }
   }
 }

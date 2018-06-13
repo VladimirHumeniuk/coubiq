@@ -11,6 +11,11 @@
   font-family: var(--f-montserat);
   font-weight: 800;
 
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
   img {
     width: 32px;
     height: 32px;

@@ -1,1 +1,19 @@
-<router-outlet></router-outlet>
+<nz-layout>
+  <nz-header>
+    <app-navbar></app-navbar>
+  </nz-header>
+
+  <nz-layout>
+    <nz-sider nzWidth="260">
+      <app-aside></app-aside>
+    </nz-sider>
+
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+
+  <nz-footer>
+    <app-footer></app-footer>
+  </nz-footer>
+</nz-layout>

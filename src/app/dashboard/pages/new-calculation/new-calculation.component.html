@@ -1,0 +1,148 @@
+<h1>Новий розрахунок</h1>
+<p>Розрахунок комунальних платежів.</p>
+
+<nz-divider></nz-divider>
+
+<form [formGroup]="meters">
+  <div nz-row nzGutter="32">
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+          <label class="form-label">Місяць</label>
+          <nz-form-control>
+            <nz-input-group>
+              <nz-month-picker nzPlaceHolder="Місяць"></nz-month-picker>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+    </div>
+
+    <div nz-col nzSpan="24" nzXl="12">
+      <h2>Показники лічильників</h2>
+
+      <nz-form-item>
+        <label class="form-label">Електроенергія</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="кВт">
+            <nz-input-number
+            formControlName="electricity"
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Газ</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="м&#179;">
+            <nz-input-number
+            formControlName="gas"
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Холодне водопостачання</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="м&#179;">
+            <nz-input-number
+            formControlName="coldWater"
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Гаряче водопостачання</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="м&#179;">
+            <nz-input-number
+            formControlName="hotWater"
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Опалення</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="Гкал">
+            <nz-input-number
+            formControlName="heating"
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="0.1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col nzSpan="24" nzXl="12">
+      <h2>Додатково</h2>
+
+      <div class="new-counter__checkbox-group">
+        <nz-form-item>
+            <label class="form-label" nz-checkbox>Інтернет</label>
+          </nz-form-item>
+
+          <nz-form-item>
+            <label class="form-label" nz-checkbox>Телефон</label>
+          </nz-form-item>
+
+          <nz-form-item>
+            <label class="form-label" nz-checkbox>ЖКП</label>
+          </nz-form-item>
+        </div>
+
+      <nz-form-item>
+        <label class="form-label">Інше</label>
+        <nz-form-control>
+          <nz-input-group nzAddOnAfter="грн">
+            <nz-input-number
+            formControlName="other"
+            [nzMin]="0"
+            [nzSize]="'large'"
+            [nzStep]="1">
+            </nz-input-number>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <label class="form-label">Комментар</label>
+        <textarea nz-input class="textarea new-counter__textarea"></textarea>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div class="new-counter__footer" nz-col nzSpan="24">
+    <div class="new-counter__controls">
+      <button
+      nz-button
+      nzSize="large"
+      type="submit">Відміна</button>
+      <button
+      nz-button
+      nzSize="large"
+      [nzType]="'primary'"
+      type="submit">Зберегти</button>
+    </div>
+
+    <div class="new-counter__total-amount">Усього:
+      <span>{{ totalAmount }}грн</span>
+    </div>
+  </div>
+</form>

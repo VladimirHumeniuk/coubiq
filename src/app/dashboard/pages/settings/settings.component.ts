@@ -7,7 +7,6 @@ import { UpdateUserService } from '../../services/update-user.service';
 import { User } from '../../../shared/interfaces/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EqualValidator } from '../../../shared/directives/validate-equal.directive';
-import { MessagesService } from '../../../shared/services/messages.service';
 
 @Component({
   selector: 'app-settings',
@@ -40,8 +39,7 @@ export class SettingsComponent implements OnInit {
     public db: AngularFireDatabase,
     private fb: FormBuilder,
     public currentService: CurrentService,
-    public updateUser: UpdateUserService,
-    private messagesServices: MessagesService
+    public updateUser: UpdateUserService
   ) { }
 
   initPassForm() {

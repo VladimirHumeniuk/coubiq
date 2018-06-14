@@ -78,6 +78,14 @@ form,
   }
 }
 
+.ant-calendar-picker-input {
+  padding-left: 12px;
+}
+
+.ant-calendar-picker-icon {
+  z-index: 2;
+}
+
 .ant-input-group-addon:last-child {
   width: 114px;
 }

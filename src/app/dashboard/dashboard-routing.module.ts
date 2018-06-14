@@ -5,6 +5,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { MyCountersComponent } from './pages/my-counters/my-counters.component';
 import { DashboardComponent } from './dashboard.component';
 import { MyCalculationsComponent } from './pages/my-calculations/my-calculations.component';
+import { NewCalculationComponent } from './pages/new-calculation/new-calculation.component';
 
 const routes: Routes = [
   {
@@ -33,9 +34,13 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [{
       path: "",
-      component: MyCalculationsComponent
+      component: MyCalculationsComponent,
+    },
+    {
+      path: "new",
+      component: NewCalculationComponent
     }]
-  }
+  },
 ];
 
 @NgModule({

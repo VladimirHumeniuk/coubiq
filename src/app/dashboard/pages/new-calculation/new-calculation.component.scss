@@ -1,0 +1,38 @@
+.new-counter__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-counter__controls {
+  margin-left: -7px;
+  margin-right: -7px;
+
+  button {
+    margin-right: 7px;
+    margin-left: 7px;
+  }
+}
+
+.new-counter__total-amount {
+  font-size: 19px;
+}
+
+.new-counter__checkbox-group {
+  display: flex;
+  margin-top: 44px;
+  margin-bottom: 4px;
+
+  .ant-form-item {
+    white-space: nowrap;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.new-counter__textarea {
+  height: 223px;
+  resize: none;
+}

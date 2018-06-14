@@ -30,6 +30,7 @@ import { CommonModule } from '@angular/common';
 import { MyCalculationsComponent } from './pages/my-calculations/my-calculations.component';
 import { CalculationsTableComponent } from './components/calculations-table/calculations-table.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { NewCalculationComponent } from './pages/new-calculation/new-calculation.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
     AsideComponent,
     CountersComponent,
     MyCalculationsComponent,
-    CalculationsTableComponent
+    CalculationsTableComponent,
+    NewCalculationComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgZorroAntdModule.forRoot(),
+    NgZorroAntdModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -60,7 +62,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     MessagesService,
     isUser,
     isGuest,
-    UpdateUserService
+    UpdateUserService,
   ]
 })
 export class DashboardModule { }

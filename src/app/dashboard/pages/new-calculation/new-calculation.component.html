@@ -9,9 +9,11 @@
       <nz-form-item>
           <label class="form-label">Місяць</label>
           <nz-form-control>
-            <nz-input-group>
-              <nz-month-picker nzPlaceHolder="Місяць"></nz-month-picker>
-            </nz-input-group>
+            <nz-month-picker
+            [(ngModel)]="month"
+            [ngModelOptions]="{ standalone: true }"
+            [nzFormat]="'MM/yyyy'"
+            nzPlaceHolder="Місяць"></nz-month-picker>
           </nz-form-control>
         </nz-form-item>
     </div>

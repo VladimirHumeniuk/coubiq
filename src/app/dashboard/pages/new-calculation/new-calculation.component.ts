@@ -14,6 +14,8 @@ export class NewCalculationComponent implements OnInit {
 
   public totalAmount: number = 0;
 
+  public month: number = new Date().getFullYear();
+
   constructor(
     private fb: FormBuilder,
     public countersService: CountersService
@@ -61,8 +63,8 @@ export class NewCalculationComponent implements OnInit {
 
   countTotal() {
     this.meters.valueChanges.subscribe(val => {
-      this.totalAmount = Number(
-        (this.countAmount('electricity') +
+      this.totalAmount = Number((
+        this.countAmount('electricity') +
         this.countAmount('gas') +
         this.countAmount('coldWater') +
         this.countAmount('hotWater') +

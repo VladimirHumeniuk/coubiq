@@ -29,6 +29,7 @@
             <nz-input-group nzAddOnAfter="кВт">
               <nz-input-number
               formControlName="electricity"
+              [nzPlaceHolder]="0"
               [nzMin]="0"
               [nzSize]="'large'"
               [nzStep]="0.1">
@@ -43,6 +44,7 @@
             <nz-input-group nzAddOnAfter="м&#179;">
               <nz-input-number
               formControlName="gas"
+              [nzPlaceHolder]="0"
               [nzMin]="0"
               [nzSize]="'large'"
               [nzStep]="0.1">
@@ -57,6 +59,7 @@
             <nz-input-group nzAddOnAfter="м&#179;">
               <nz-input-number
               formControlName="coldWater"
+              [nzPlaceHolder]="0"
               [nzMin]="0"
               [nzSize]="'large'"
               [nzStep]="0.1">
@@ -71,6 +74,7 @@
             <nz-input-group nzAddOnAfter="м&#179;">
               <nz-input-number
               formControlName="hotWater"
+              [nzPlaceHolder]="0"
               [nzMin]="0"
               [nzSize]="'large'"
               [nzStep]="0.1">
@@ -85,6 +89,7 @@
             <nz-input-group nzAddOnAfter="Гкал">
               <nz-input-number
               formControlName="heating"
+              [nzPlaceHolder]="0"
               [nzMin]="0"
               [nzSize]="'large'"
               [nzStep]="0.1">
@@ -130,6 +135,7 @@
               <nz-input-number
               formControlName="other"
               [nzMin]="0"
+              [nzPlaceHolder]="0"
               [nzSize]="'large'"
               [nzStep]="1">
               </nz-input-number>
@@ -158,7 +164,7 @@
       </div>
 
       <div class="new-counter__total-amount">Усього:
-        <span>{{ totalAmount }}грн</span>
+        <span>{{ countTotal }}грн</span>
       </div>
     </div>
   </form>

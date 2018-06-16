@@ -38,15 +38,8 @@ body {
 }
 
 .ant-layout-content {
-  padding: 40px 64px 0;
+  padding: 40px 64px;
   background-color: #fff;
-
-  &::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 80px;
-  }
 }
 
 .ant-layout-footer,

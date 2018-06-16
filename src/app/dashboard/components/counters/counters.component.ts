@@ -99,8 +99,7 @@ export class CountersComponent implements OnInit {
           'houseroom': value.houseroom,
           'internet': value.internet,
           'phone': value.phone,
-          'services': value.services,
-          'other': value.other
+          'services': value.services
         })
       }
     });

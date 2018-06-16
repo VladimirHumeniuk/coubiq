@@ -14,6 +14,9 @@ export class NewCalculationComponent implements OnInit {
 
   public totalAmount: number = 0;
 
+  public inputsValue: number = 0;
+  public checkboxValue: number = 0;
+
   public month: number = new Date().getFullYear();
   public internet: boolean = false;
   public phone: boolean = false;
@@ -29,17 +32,17 @@ export class NewCalculationComponent implements OnInit {
 
         if (this.counters.internet > 0) {
           this.internet = true;
-          this.totalAmount += this.counters.internet;
+          this.checkboxValue += this.counters.internet;
         }
 
         if (this.counters.phone > 0) {
           this.phone = true;
-          this.totalAmount += this.counters.phone;
+          this.checkboxValue += this.counters.phone;
         }
 
         if (this.counters.services > 0) {
           this.services = true;
-          this.totalAmount += this.counters.services;
+          this.checkboxValue += this.counters.services;
         }
       }
     })
@@ -70,32 +73,38 @@ export class NewCalculationComponent implements OnInit {
       ]]
     })
 
-    this.countTotal();
+    this.countInputs();
   }
 
-  private countAmount(counter: string): number {
+  protected countValue(counter: string): number {
     if (this.counters) {
       return this.meters.get(counter).value * this.counters[counter]
     }
   }
 
-  private countTotal(): void {
+  protected countInputs(): void {
     this.meters.valueChanges.subscribe(val => {
-      this.totalAmount = Number((
-        this.countAmount('electricity') +
-        this.countAmount('gas') +
-        this.countAmount('coldWater') +
-        this.countAmount('hotWater') +
-        this.countAmount('heating') +
-        this.countAmount('houseroom') +
-        this.countAmount('other'))
-        .toFixed(2)
+      this.inputsValue = Number((
+        this.countValue('electricity') +
+        this.countValue('gas') +
+        this.countValue('coldWater') +
+        this.countValue('hotWater') +
+        this.countValue('heating') +
+        this.countValue('houseroom'))
       )
+
+      if (this.meters.get('other').value) {
+        this.inputsValue += this.meters.get('other').value;
+      }
     })
   }
 
-  public countAdditional(checkbox: string): void {
-    this[checkbox] ? this.totalAmount += this.counters[checkbox] : this.totalAmount -= this.counters[checkbox];
+  protected countAdditional(checkbox: string): void {
+    this[checkbox] ? this.checkboxValue += this.counters[checkbox] : this.checkboxValue -= this.counters[checkbox];
+  }
+
+  get countTotal(): number {
+    return Math.round((this.inputsValue + this.checkboxValue) * 1e2) / 1e2
   }
 
   ngOnInit() {

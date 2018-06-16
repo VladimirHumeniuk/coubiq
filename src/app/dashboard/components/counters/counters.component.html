@@ -38,7 +38,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <label class="form-label">Холодне водопостачання</label>
+        <label class="form-label">Холодне водопостачання та водовідведення</label>
         <nz-form-control>
           <nz-input-group nzAddOnAfter="грн. за 1 м&#179;">
             <nz-input-number
@@ -134,20 +134,6 @@
           <nz-input-group nzAddOnAfter="грн. на місяць">
             <nz-input-number
             formControlName="services"
-            [nzMin]="0"
-            [nzSize]="'large'"
-            [nzStep]="1">
-            </nz-input-number>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <label class="form-label">Інше</label>
-        <nz-form-control>
-          <nz-input-group nzAddOnAfter="грн. на місяць">
-            <nz-input-number
-            formControlName="other"
             [nzMin]="0"
             [nzSize]="'large'"
             [nzStep]="1">

@@ -15,6 +15,9 @@ export class NewCalculationComponent implements OnInit {
   public totalAmount: number = 0;
 
   public month: number = new Date().getFullYear();
+  public internet: boolean = false;
+  public phone: boolean = false;
+  public services: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -23,11 +26,26 @@ export class NewCalculationComponent implements OnInit {
     this.countersService.getCounters.subscribe((value) => {
       if (value && Object.keys(value).length !== 0) {
         this.counters = value;
+
+        if (this.counters.internet > 0) {
+          this.internet = true;
+          this.totalAmount += this.counters.internet;
+        }
+
+        if (this.counters.phone > 0) {
+          this.phone = true;
+          this.totalAmount += this.counters.phone;
+        }
+
+        if (this.counters.services > 0) {
+          this.services = true;
+          this.totalAmount += this.counters.services;
+        }
       }
     })
   }
 
-  initMetersForm() {
+  private initMetersForm(): void {
     this.meters = this.fb.group({
       electricity: ['0', [
         Validators.min(0)
@@ -55,13 +73,13 @@ export class NewCalculationComponent implements OnInit {
     this.countTotal();
   }
 
-  countAmount(counter: string) {
+  private countAmount(counter: string): number {
     if (this.counters) {
       return this.meters.get(counter).value * this.counters[counter]
     }
   }
 
-  countTotal() {
+  private countTotal(): void {
     this.meters.valueChanges.subscribe(val => {
       this.totalAmount = Number((
         this.countAmount('electricity') +
@@ -76,7 +94,11 @@ export class NewCalculationComponent implements OnInit {
     })
   }
 
+  public countAdditional(checkbox: string): void {
+    this[checkbox] ? this.totalAmount += this.counters[checkbox] : this.totalAmount -= this.counters[checkbox];
+  }
+
   ngOnInit() {
-    this.initMetersForm()
+    this.initMetersForm();
   }
 }

@@ -22,7 +22,7 @@ body {
 }
 
 .ant-layout {
-  height: 100%;
+  min-height: calc(100% - 70px);
 }
 
 .ant-layout-header {

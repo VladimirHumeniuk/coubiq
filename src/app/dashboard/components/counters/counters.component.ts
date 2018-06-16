@@ -55,9 +55,6 @@ export class CountersComponent implements OnInit {
       ]],
       services: ['0', [
         Validators.min(0)
-      ]],
-      other: ['0', [
-        Validators.min(0)
       ]]
     })
   }
@@ -78,8 +75,7 @@ export class CountersComponent implements OnInit {
       houseroom: formData.houseroom,
       internet: formData.internet,
       phone: formData.phone,
-      services: formData.services,
-      other: formData.other
+      services: formData.services
     };
 
     this.db.object(`${this.userRef}/${uid}/counters`).update(counters)

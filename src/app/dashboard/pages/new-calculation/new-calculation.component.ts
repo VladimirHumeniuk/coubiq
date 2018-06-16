@@ -84,16 +84,18 @@ export class NewCalculationComponent implements OnInit {
 
   protected countInputs(): void {
     this.meters.valueChanges.subscribe(val => {
-      this.inputsValue = Number((
-        this.countValue('electricity') +
-        this.countValue('gas') +
-        this.countValue('coldWater') +
-        this.countValue('hotWater') +
-        this.countValue('heating') +
-        this.countValue('houseroom'))
-      )
 
-      if (this.meters.get('other').value) {
+      let res = [];
+
+      Object.keys(this.meters.controls).forEach(key => {
+        res.push(this.meters.get(key).value * this.counters[key])
+      });
+
+      res = res.reduce((prev, next) => prev + next);
+
+      this.inputsValue = Number(res);
+
+      if (this.meters.get('other').value > 0) {
         this.inputsValue += this.meters.get('other').value;
       }
     })

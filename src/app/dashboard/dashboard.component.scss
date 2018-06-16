@@ -1,0 +1,10 @@
+:host ::ng-deep .calculations-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+}

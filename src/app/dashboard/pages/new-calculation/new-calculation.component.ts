@@ -17,7 +17,7 @@ export class NewCalculationComponent implements OnInit {
   public inputsValue: number = 0;
   public checkboxValue: number = 0;
 
-  public month: number = new Date().getFullYear();
+  public month: object = new Date();
   public internet: boolean = false;
   public phone: boolean = false;
   public services: boolean = false;
@@ -29,6 +29,10 @@ export class NewCalculationComponent implements OnInit {
     this.countersService.getCounters.subscribe((value) => {
       if (value && Object.keys(value).length !== 0) {
         this.counters = value;
+
+        if (!this.counters.withCounters) {
+          this.meters.controls['heating'].patchValue(this.counters.houseroom * this.counters.heating)
+        }
 
         if (this.counters.internet > 0) {
           this.internet = true;
@@ -88,7 +92,13 @@ export class NewCalculationComponent implements OnInit {
       let res = [];
 
       Object.keys(this.meters.controls).forEach(key => {
-        res.push(this.meters.get(key).value * this.counters[key])
+        if (this.counters.withCounter) {
+          res.push(this.meters.get(key).value * this.counters[key])
+        } else {
+          if (key != 'heating') {
+            res.push(this.meters.get(key).value * this.counters[key])
+          }
+        }
       });
 
       res = res.reduce((prev, next) => prev + next);

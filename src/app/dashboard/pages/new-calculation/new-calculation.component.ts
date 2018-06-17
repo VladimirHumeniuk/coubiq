@@ -30,7 +30,7 @@ export class NewCalculationComponent implements OnInit {
       if (value && Object.keys(value).length !== 0) {
         this.counters = value;
 
-        if (!this.counters.withCounters) {
+        if (!this.counters.withCounter) {
           this.meters.controls['heating'].patchValue(this.counters.houseroom * this.counters.heating)
         }
 
@@ -102,6 +102,10 @@ export class NewCalculationComponent implements OnInit {
       });
 
       res = res.reduce((prev, next) => prev + next);
+
+      if (!this.counters.withCounter) {
+        res = Number(res) + this.meters.get('heating').value;
+      }
 
       this.inputsValue = Number(res);
 

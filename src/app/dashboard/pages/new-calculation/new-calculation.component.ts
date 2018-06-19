@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CountersService } from '../../services/counters.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { CurrentService } from '../../../shared/services/current.service';
+import { DatePipe } from '@angular/common';
+import { getOrCreateChangeDetectorRef } from '@angular/core/src/render3/di';
 
 @Component({
   selector: 'app-new-calculation',
@@ -8,6 +12,7 @@ import { CountersService } from '../../services/counters.service';
   styleUrls: ['./new-calculation.component.scss']
 })
 export class NewCalculationComponent implements OnInit {
+  protected userRef: string = 'users';
 
   public meters: FormGroup;
   public counters: any;
@@ -22,9 +27,14 @@ export class NewCalculationComponent implements OnInit {
   public phone: boolean = false;
   public services: boolean = false;
 
+  public _TOTAL: any = [];
+
   constructor(
+    private db: AngularFireDatabase,
     private fb: FormBuilder,
-    public countersService: CountersService
+    public currentService: CurrentService,
+    public countersService: CountersService,
+    private datePipe: DatePipe
   ) {
     this.countersService.getCounters.subscribe((value) => {
       if (value && Object.keys(value).length !== 0) {
@@ -74,30 +84,25 @@ export class NewCalculationComponent implements OnInit {
       ]],
       other: ['0', [
         Validators.min(0)
-      ]]
+      ]],
+      comment:  ['', []],
     })
 
     this.countInputs();
-  }
-
-  protected countValue(counter: string): number {
-    if (this.counters) {
-      return this.meters.get(counter).value * this.counters[counter]
-    }
   }
 
   protected countInputs(): void {
     this.meters.valueChanges.subscribe(val => {
 
       let res = [];
+      this._TOTAL = [];
 
       Object.keys(this.meters.controls).forEach(key => {
-        if (this.counters.withCounter) {
-          res.push(this.meters.get(key).value * this.counters[key])
-        } else {
-          if (key != 'heating') {
-            res.push(this.meters.get(key).value * this.counters[key])
-          }
+        if (this.counters.withCounter && key != 'comment') {
+          this.countMeters(res, key)
+
+        } else if (key != 'heating' && key != 'comment') {
+          this.countMeters(res, key)
         }
       });
 
@@ -115,12 +120,46 @@ export class NewCalculationComponent implements OnInit {
     })
   }
 
+  protected countMeters(arr: any, key: string) {
+    arr.push(this.meters.get(key).value * this.counters[key]);
+
+    this._TOTAL.push({
+      [key]: {
+        val: this.meters.get(key).value,
+        cost: this.meters.get(key).value * this.counters[key]
+      }
+    });
+  }
+
   protected countAdditional(checkbox: string): void {
     this[checkbox] ? this.checkboxValue += this.counters[checkbox] : this.checkboxValue -= this.counters[checkbox];
   }
 
   get countTotal(): number {
     return Math.round((this.inputsValue + this.checkboxValue) * 1e2) / 1e2
+  }
+
+  saveCalculation(uid: string, month: string) {
+    let date = this.datePipe.transform(month, 'MM-yyyy');
+    let ref = `${this.userRef}/${uid}/calculations/${date}`;
+    let index;
+
+    let other = {
+      'date': date,
+      'additional': {
+        'Інтернет': this.internet,
+        'Телефон': this.phone,
+        'ЖКП': this.services
+      },
+      'comment': this.meters.get('comment').value,
+      'total': this.countTotal
+    }
+
+    this._TOTAL.push(other);
+
+    for (index = 0; index < this._TOTAL.length; ++index) {
+      this.db.object(ref).update(this._TOTAL[index])
+    }
   }
 
   ngOnInit() {

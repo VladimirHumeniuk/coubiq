@@ -113,6 +113,7 @@
                 [(ngModel)]="internet"
                 [ngModelOptions]="{ standalone: true }"
                 (ngModelChange)="countAdditional('internet')"
+                [nzDisabled]="!this.counters?.internet || this.counters?.internet == 0"
                 nz-checkbox>Інтернет</label>
               </nz-form-item>
 
@@ -121,6 +122,7 @@
                 [(ngModel)]="phone"
                 [ngModelOptions]="{ standalone: true }"
                 (ngModelChange)="countAdditional('phone')"
+                [nzDisabled]="this.counters?.phone == 0"
                 nz-checkbox>Телефон</label>
               </nz-form-item>
 
@@ -129,6 +131,7 @@
                 [(ngModel)]="services"
                 [ngModelOptions]="{ standalone: true }"
                 (ngModelChange)="countAdditional('services')"
+                [nzDisabled]="!this.counters?.services ||this.counters?.services == 0"
                 nz-checkbox>ЖКП</label>
               </nz-form-item>
             </div>

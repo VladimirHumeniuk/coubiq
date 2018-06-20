@@ -4,7 +4,8 @@ import { CountersService } from '../../services/counters.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { CurrentService } from '../../../shared/services/current.service';
 import { DatePipe } from '@angular/common';
-import { getOrCreateChangeDetectorRef } from '@angular/core/src/render3/di';
+import { MessagesService } from '../../../shared/services/messages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-calculation',
@@ -34,7 +35,9 @@ export class NewCalculationComponent implements OnInit {
     private fb: FormBuilder,
     public currentService: CurrentService,
     public countersService: CountersService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public messagesService: MessagesService,
+    private router: Router
   ) {
     this.countersService.getCounters.subscribe((value) => {
       if (value && Object.keys(value).length !== 0) {
@@ -113,10 +116,6 @@ export class NewCalculationComponent implements OnInit {
       }
 
       this.inputsValue = Number(res);
-
-      if (this.meters.get('other').value > 0) {
-        this.inputsValue += this.meters.get('other').value;
-      }
     })
   }
 
@@ -157,9 +156,21 @@ export class NewCalculationComponent implements OnInit {
 
     this._TOTAL.push(other);
 
+    let promises = [];
+
     for (index = 0; index < this._TOTAL.length; ++index) {
-      this.db.object(ref).update(this._TOTAL[index])
+      let promise = this.db.object(ref).update(this._TOTAL[index]);
+      promises.push(promise);
     }
+
+    Promise.all(promises)
+      .then(() => {
+        this.messagesService.createMessage('success', `Розрахунок за ${date} збережено.`);
+        this.router.navigate(['/dashboard/my-calculations']);
+      })
+      .catch(error => {
+        this.messagesService.createMessage('error', "Виникла помилка при збереженні. Спробуйте пізніше.");
+      });
   }
 
   ngOnInit() {

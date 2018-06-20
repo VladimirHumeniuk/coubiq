@@ -74,7 +74,8 @@ export class CountersComponent implements OnInit {
       houseroom: formData.houseroom,
       internet: formData.internet,
       phone: formData.phone,
-      services: formData.services
+      services: formData.services,
+      other: 1
     };
 
     this.db.object(`${this.userRef}/${uid}/counters`).update(counters)

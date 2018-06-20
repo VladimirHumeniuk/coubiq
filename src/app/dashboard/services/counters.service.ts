@@ -5,7 +5,6 @@ import { AuthService } from '../../shared/services/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
-import { Subscription } from 'rxjs/Subscription';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,7 @@ export class CountersService {
       if(res) {
         this.counters = res;
       }
-    });
+    })
   }
 
   get getCounters(): Observable<Counters> {

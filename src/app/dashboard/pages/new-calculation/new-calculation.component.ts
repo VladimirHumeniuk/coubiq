@@ -125,7 +125,7 @@ export class NewCalculationComponent implements OnInit {
     this._TOTAL.push({
       [key]: {
         val: this.meters.get(key).value,
-        cost: this.meters.get(key).value * this.counters[key]
+        cost: Math.round((this.meters.get(key).value * this.counters[key]) * 1e2) / 1e2
       }
     });
   }
@@ -145,11 +145,7 @@ export class NewCalculationComponent implements OnInit {
 
     let other = {
       'date': date,
-      'additional': {
-        'Інтернет': this.internet,
-        'Телефон': this.phone,
-        'ЖКП': this.services
-      },
+      'additional': this.checkboxValue,
       'comment': this.meters.get('comment').value,
       'total': this.countTotal
     }

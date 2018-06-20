@@ -1,3 +1,4 @@
+import { CalculationsService } from './services/calculations.service';
 import { SharedModule } from './../shared/shared.module';
 import { CountersService } from './services/counters.service';
 import { AuthService } from './../shared/services/auth.service';
@@ -63,6 +64,7 @@ import { NewCalculationComponent } from './pages/new-calculation/new-calculation
     isUser,
     isGuest,
     UpdateUserService,
+    CalculationsService
   ]
 })
 export class DashboardModule { }

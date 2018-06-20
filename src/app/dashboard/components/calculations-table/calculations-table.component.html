@@ -1,21 +1,46 @@
 <nz-table
+#calculationsTable
 [nzNoResult]="'Данні відсутні'"
->
+[nzData]="calculationService.calculations"
+[nzLoading]="!calculationService.calcLoaded">
   <thead>
     <tr>
+      <th nzShowExpand></th>
       <th>Дата</th>
       <th>Електроенергія</th>
       <th>Газ</th>
       <th>Холодне в-ння</th>
       <th>Гаряче в-ння</th>
       <th>Опалення</th>
-      <th>Додатково <i nzTitle="Інтертет, Телефон, ЖКП" nz-tooltip class="anticon anticon-question-circle-o"></i></th>
+      <th>Додатково <i nzTitle="Інтернет, Телефон, ЖКП" nz-tooltip class="anticon anticon-question-circle-o"></i></th>
+      <th>Інше</th>
       <th>Разом</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr>
-    </tr>
+    <ng-container *ngFor="let data of calculationsTable.data">
+      <tr>
+        <ng-container *ngIf="data.value.comment">
+          <td nzShowExpand [(nzExpand)]="data.expand"></td>
+        </ng-container>
+        <ng-container *ngIf="!data.value.comment">
+          <td></td>
+        </ng-container>
+        <td>{{ data.key }}</td>
+        <td>{{ data.value.electricity.cost }} грн.</td>
+        <td>{{ data.value.gas.cost }} грн.</td>
+        <td>{{ data.value.coldWater.cost }} грн.</td>
+        <td>{{ data.value.hotWater.cost }} грн.</td>
+        <td>{{ data.value.heating.cost }} грн.</td>
+        <td>{{ data.value.additional }} грн.</td>
+        <td>{{ data.value.other.cost }} грн.</td>
+        <td>{{ data.value.total }} грн.</td>
+      </tr>
+      <tr [nzExpand]="data.expand" *ngIf="data.value.comment">
+        <td></td>
+        <td colspan="9">{{ data.value.comment }}</td>
+      </tr>
+    </ng-container>
   </tbody>
 </nz-table>

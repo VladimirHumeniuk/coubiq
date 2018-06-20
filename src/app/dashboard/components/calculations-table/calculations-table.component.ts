@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalculationsService } from './../../services/calculations.service';
 
 @Component({
   selector: 'app-calculations-table',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculationsTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public calculationService: CalculationsService
+  ) {  }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
 }

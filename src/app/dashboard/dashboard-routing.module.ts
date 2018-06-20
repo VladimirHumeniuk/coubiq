@@ -6,6 +6,7 @@ import { MyCountersComponent } from './pages/my-counters/my-counters.component';
 import { DashboardComponent } from './dashboard.component';
 import { MyCalculationsComponent } from './pages/my-calculations/my-calculations.component';
 import { NewCalculationComponent } from './pages/new-calculation/new-calculation.component';
+import { CountersGuard } from './guards/counters.guard';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
     },
     {
       path: "new",
-      component: NewCalculationComponent
+      component: NewCalculationComponent,
+      canActivate: [CountersGuard]
     }]
   },
 ];

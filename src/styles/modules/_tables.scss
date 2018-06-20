@@ -1,0 +1,11 @@
+.ant-table-body {
+  overflow: auto;
+}
+
+.ant-table-thead > tr > th {
+  word-break: normal;
+}
+
+.ant-table-tbody > tr:not(.ant-table-expanded-row) > td {
+  white-space: nowrap;
+}

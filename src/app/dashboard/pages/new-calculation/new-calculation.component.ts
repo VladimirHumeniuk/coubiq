@@ -82,9 +82,6 @@ export class NewCalculationComponent implements OnInit {
       heating: ['0', [
         Validators.min(0)
       ]],
-      houseroom: ['0', [
-        Validators.min(0)
-      ]],
       other: ['0', [
         Validators.min(0)
       ]],

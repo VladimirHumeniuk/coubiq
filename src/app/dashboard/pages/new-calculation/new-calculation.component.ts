@@ -6,6 +6,7 @@ import { CurrentService } from '../../../shared/services/current.service';
 import { DatePipe } from '@angular/common';
 import { MessagesService } from '../../../shared/services/messages.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-calculation',
@@ -37,7 +38,8 @@ export class NewCalculationComponent implements OnInit {
     public countersService: CountersService,
     private datePipe: DatePipe,
     public messagesService: MessagesService,
-    private router: Router
+    private router: Router,
+    private _location: Location
   ) {
     this.countersService.getCounters.subscribe((value) => {
       if (value && Object.keys(value).length !== 0) {
@@ -61,6 +63,16 @@ export class NewCalculationComponent implements OnInit {
           this.services = true;
           this.checkboxValue += this.counters.services;
         }
+
+        let res = [];
+
+        Object.keys(this.meters.controls).forEach(key => {
+          if (this.counters.withCounter && key != 'comment') {
+            this.countMeters(res, key)
+          } else if (key != 'heating' && key != 'comment') {
+            this.countMeters(res, key)
+          }
+        });
       }
     })
   }
@@ -95,7 +107,6 @@ export class NewCalculationComponent implements OnInit {
     this.meters.valueChanges.subscribe(val => {
 
       let res = [];
-      this._TOTAL = [];
 
       Object.keys(this.meters.controls).forEach(key => {
         if (this.counters.withCounter && key != 'comment') {
@@ -164,6 +175,10 @@ export class NewCalculationComponent implements OnInit {
       .catch(error => {
         this.messagesService.createMessage('error', "Виникла помилка при збереженні. Спробуйте пізніше.");
       });
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   ngOnInit() {

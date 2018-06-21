@@ -11,7 +11,7 @@ import { CountersGuard } from './guards/counters.guard';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "my-counters",
+    redirectTo: "my-calculations",
     pathMatch: "full"
   },
   {

@@ -10,7 +10,7 @@ export class MessagesService {
     private message: NzMessageService
   ) { }
 
-  createMessage(type: string, message: string): void {
+  public createMessage(type: string, message: string): void {
     this.message.create(type, message);
   }
 }

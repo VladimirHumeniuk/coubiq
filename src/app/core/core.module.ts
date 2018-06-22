@@ -10,13 +10,11 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { RegistrationService } from './services/registration.service';
 
-// Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
 
-// 3rd party modules
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { AuthService } from '../shared/services/auth.service';

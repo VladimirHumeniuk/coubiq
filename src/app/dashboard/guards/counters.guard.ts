@@ -14,7 +14,7 @@ export class CountersGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(
+  public canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       if (this.countersService.getCounters) {

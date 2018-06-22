@@ -10,7 +10,7 @@ export class isUser implements CanActivate {
     private fireAuth: AngularFireAuth
   ) {}
 
-  canActivate(
+  public canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
@@ -32,7 +32,7 @@ export class isGuest implements CanActivate {
     private fireAuth: AngularFireAuth
   ) {}
 
-  canActivate(
+  public canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 

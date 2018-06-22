@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { first, tap } from 'rxjs/operators';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { User } from '../interfaces/user';

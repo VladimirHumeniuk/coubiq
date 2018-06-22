@@ -34,7 +34,7 @@ export class SignInComponent implements OnInit {
     })
   }
 
-  login(form) {
+  login(form: string) {
     for (const i in this.authentication.controls) {
       this.authentication.controls[i].markAsDirty();
       this.authentication.controls[i].updateValueAndValidity();
@@ -48,4 +48,5 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.initForm();
   }
+
 }

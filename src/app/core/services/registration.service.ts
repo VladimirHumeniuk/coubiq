@@ -49,8 +49,6 @@ export class RegistrationService {
   };
 
   onSubmit(form, country, city) {
-    const controls = form.controls;
-
     let formData = Object.assign({});
     formData = Object.assign(formData, form.value);
 
@@ -59,7 +57,7 @@ export class RegistrationService {
       email: formData.email,
       country: country,
       city: city
-    }
+    };
 
     this.createUser(user, formData.password);
   }

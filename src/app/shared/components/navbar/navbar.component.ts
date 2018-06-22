@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CurrentService } from '../../services/current.service';
 import { AuthService } from '../../services/auth.service';
@@ -12,14 +11,14 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    public currService: CurrentService,
-    private router: Router
+    public currService: CurrentService
   ) { }
 
-  logout(): void {
+  public logout(): void {
     this.authService.logout();
   }
 
   ngOnInit() {
   }
+
 }

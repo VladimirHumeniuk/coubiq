@@ -31,6 +31,8 @@ export class NewCalculationComponent implements OnInit {
   public phone: boolean = false;
   public services: boolean = false;
 
+  public saveLoader: boolean = false;
+
   public _TOTAL: any = [];
 
   constructor(
@@ -44,7 +46,7 @@ export class NewCalculationComponent implements OnInit {
     private _location: Location,
     private modal: NzModalService
   ) {
-    this.countersService.getCounters.subscribe((value) => {
+    this.countersService.getCounters.subscribe(value => {
       if (value && Object.keys(value).length !== 0) {
         this.counters = value;
 
@@ -52,20 +54,8 @@ export class NewCalculationComponent implements OnInit {
           this.meters.controls['heating'].patchValue(this.counters.houseroom * this.counters.heating)
         }
 
-        if (this.counters.internet > 0) {
-          this.internet = true;
-          this.checkboxValue += this.counters.internet;
-        }
-
-        if (this.counters.phone > 0) {
-          this.phone = true;
-          this.checkboxValue += this.counters.phone;
-        }
-
-        if (this.counters.services > 0) {
-          this.services = true;
-          this.checkboxValue += this.counters.services;
-        }
+        const fields = ['internet', 'phone', 'services'];
+        fields.forEach(this.checkCounter);
 
         let res = [];
 
@@ -78,6 +68,13 @@ export class NewCalculationComponent implements OnInit {
         });
       }
     })
+  }
+
+  private checkCounter = (property: string): void => {
+    if (this.counters[property] > 0) {
+      this[property] = true;
+      this.checkboxValue += this.counters[property];
+    }
   }
 
   private initMetersForm(): void {
@@ -106,7 +103,7 @@ export class NewCalculationComponent implements OnInit {
     this.countInputs();
   }
 
-  protected countInputs(): void {
+  private countInputs(): void {
     this.meters.valueChanges.subscribe(val => {
 
       let res = [];
@@ -129,7 +126,7 @@ export class NewCalculationComponent implements OnInit {
     })
   }
 
-  protected countMeters(arr: any, key: string) {
+  private countMeters(arr: any, key: string): void {
     arr.push(this.meters.get(key).value * this.counters[key]);
 
     this._TOTAL.push({
@@ -140,7 +137,7 @@ export class NewCalculationComponent implements OnInit {
     });
   }
 
-  protected countAdditional(checkbox: string): void {
+  private countAdditional(checkbox: string): void {
     this[checkbox] ? this.checkboxValue += this.counters[checkbox] : this.checkboxValue -= this.counters[checkbox];
   }
 
@@ -148,7 +145,7 @@ export class NewCalculationComponent implements OnInit {
     return Math.round((this.inputsValue + this.checkboxValue) * 1e2) / 1e2
   }
 
-  saveCalculation(uid: string, month: string) {
+  public saveCalculation(uid: string, month: string): void {
     let date = this.datePipe.transform(month, 'MM-yyyy');
     let ref = `${this.userRef}/${uid}/calculations/`;
     let other = {
@@ -168,18 +165,19 @@ export class NewCalculationComponent implements OnInit {
           nzContent: 'Перезаписати дані?',
           nzOkText: 'Так',
           nzCancelText: 'Ні',
-          nzOkType: 'danger',
-          nzOnOk: () => this.updateCalculation(ref, date),
+          nzOnOk: () => this.updateCalculation(ref, date)
         })
       } else {
         this.updateCalculation(ref, date)
       }
-    });
+    })
   }
 
   private updateCalculation(ref: string, date: string): void {
     let index;
     let promises = [];
+
+    this.saveLoader = true;
 
     for (index = 0; index < this._TOTAL.length; ++index) {
       let promise = this.db.object(`${ref}${date}`).update(this._TOTAL[index]);
@@ -190,17 +188,20 @@ export class NewCalculationComponent implements OnInit {
       .then(() => {
         this.messagesService.createMessage('success', `Розрахунок за ${date} збережено.`);
         this.router.navigate(['/dashboard/my-calculations']);
+
+        this.saveLoader = false;
       })
       .catch(error => {
         this.messagesService.createMessage('error', "Виникла помилка при збереженні. Спробуйте пізніше.");
       });
   }
 
-  backClicked() {
+  public backClicked(): void {
     this._location.back();
   }
 
   ngOnInit() {
     this.initMetersForm();
   }
+
 }

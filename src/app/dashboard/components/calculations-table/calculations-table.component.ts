@@ -18,7 +18,7 @@ export class CalculationsTableComponent implements OnInit {
     private messagesService: MessagesService
   ) {  }
 
-  removeCalculation(key: string, uid: string = this.authService.currentUser.uid): void {
+  public removeCalculation(key: string, uid: string = this.authService.currentUser.uid): void {
     this.db.list(`users/${uid}/calculations/`).remove(key)
       .then(() => this.messagesService.createMessage('success', `Розрахунок за ${key} видалено`))
       .catch(error => {
@@ -27,6 +27,6 @@ export class CalculationsTableComponent implements OnInit {
       });
   }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
 }

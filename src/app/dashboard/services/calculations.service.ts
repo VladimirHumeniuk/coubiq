@@ -13,7 +13,7 @@ export class CalculationsService {
   public calculations = [];
 
   public currentCalctulations = null;
-  public calcLoaded = false;
+  public calcLoaded: boolean = false;
 
   constructor(
     public authService: AuthService,

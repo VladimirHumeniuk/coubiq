@@ -13,7 +13,6 @@ export class AuthService {
   public currentUser: firebase.User;
   public user$: Observable<User>;
 
-  // Validation errors
   public invalidEmailMsg: string;
   public invalidPasswordMsg: string;
   public invalidDataMsg: string;
@@ -23,7 +22,7 @@ export class AuthService {
     private db: AngularFireDatabase,
     private router: Router
   ) {
-    this.authFb.authState.subscribe((auth) => {
+    this.authFb.authState.subscribe(auth => {
       this.currentUser = auth;
     })
 
@@ -38,9 +37,7 @@ export class AuthService {
     })
   }
 
-  public auth(form): any {
-    const controls = form.controls;
-
+  public auth(form: any): object {
     let formData = Object.assign({});
     formData = Object.assign(formData, form.value);
 

@@ -15,10 +15,10 @@ import { EqualValidator } from '../../../shared/directives/validate-equal.direct
 })
 export class SettingsComponent implements OnInit {
 
-  protected nameMinLength: number = 4;
-  protected nameMaxLength: number = 36;
-  protected passMinLength: number = 6;
-  protected passMaxLength: number = 30;
+  private nameMinLength: number = 4;
+  private nameMaxLength: number = 36;
+  private passMinLength: number = 6;
+  private passMaxLength: number = 30;
 
   public passwordNotEqual: string = 'Паролі не співпадають.';
   public noCitySelected: string = 'Оберіть місто.';
@@ -36,13 +36,13 @@ export class SettingsComponent implements OnInit {
   public current;
 
   constructor(
-    public db: AngularFireDatabase,
     private fb: FormBuilder,
+    public db: AngularFireDatabase,
     public currentService: CurrentService,
     public updateUser: UpdateUserService
   ) { }
 
-  initPassForm() {
+  private initPassForm(): void {
     this.newPassForm = this.fb.group({
       newPassword: ['', [
         Validators.required,
@@ -56,7 +56,7 @@ export class SettingsComponent implements OnInit {
     })
   }
 
-  updateUserData(
+  public updateUserData(
     uid: string,
     username: string,
     country: string,
@@ -72,19 +72,19 @@ export class SettingsComponent implements OnInit {
     this.updateUser.updateUserData(uid, user)
   }
 
-  isControlInvalid(controlName: string): boolean {
+  public isControlInvalid(controlName: string): boolean {
     const control = this.newPassForm.controls[controlName];
     const result = control.invalid && control.touched;
 
     return result;
   }
 
-  minLengthError(inputName: string, minlength: number, maxlength: number): string {
+  public minLengthError(inputName: string, minlength: number, maxlength: number): string {
     const sufix = minlength < 5 ? "и" : "ів";
     return `Мінімальна довжина ${inputName}: ${minlength} символ${sufix}. Максимальна: ${maxlength}.`
   }
 
-  updatePassword(password, form): void {
+  public updatePassword(password, form): void {
     for (const i in this.newPassForm.controls) {
       this.newPassForm.controls[i].markAsDirty();
       this.newPassForm.controls[i].updateValueAndValidity();
@@ -99,4 +99,5 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.initPassForm();
   }
+
 }

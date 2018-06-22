@@ -58,9 +58,7 @@ export class CountersComponent implements OnInit {
     })
   }
 
-  saveCounter(uid: string, form: any) {
-    const controls = form.controls;
-
+  public saveCounter(uid: string, form: any): void {
     let formData = Object.assign({});
     formData = Object.assign(formData, form.value);
 

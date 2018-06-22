@@ -24,7 +24,6 @@
     "angularfire2": "^5.0.0-rc.5-next",
     "core-js": "^2.5.7",
     "firebase": "^4.13.1",
-    "fsevents": "^1.2.4",
     "less": "^2.7.2",
     "ng-zorro-antd": "^1.0.0",
     "rxjs": "^6.2.1",

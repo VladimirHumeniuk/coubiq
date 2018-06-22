@@ -15,6 +15,7 @@
       <th class="no-wrap">Додатково <i nzTitle="Інтернет, Телефон, ЖКП" nz-tooltip class="anticon anticon-question-circle-o"></i></th>
       <th>Інше</th>
       <th>Разом</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -36,6 +37,14 @@
         <td>{{ data.value.additional }} грн.</td>
         <td>{{ data.value.other.cost }} грн.</td>
         <td>{{ data.value.total }} грн.</td>
+        <td>
+          <a
+          nz-popconfirm nzTitle="Впевнені, що хочете видалити розрахунок за {{data.key}}?"
+          (nzOnConfirm)="removeCalculation(data.key)"
+          [nzOkText]="'Так'">
+            <i class="anticon anticon-delete"></i>
+          </a>
+        </td>
       </tr>
       <tr [nzExpand]="data.expand" *ngIf="data.value.comment">
         <td></td>

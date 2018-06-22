@@ -22,6 +22,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { CurrentService } from '../shared/services/current.service';
 import { MessagesService } from './../shared/services/messages.service';
+import { NzModalService } from 'ng-zorro-antd';
 import { isUser, isGuest } from '../shared/guards/auth.guard';
 import { UpdateUserService } from './services/update-user.service';
 import { MyCountersComponent } from './pages/my-counters/my-counters.component';
@@ -61,6 +62,7 @@ import { NewCalculationComponent } from './pages/new-calculation/new-calculation
     CurrentService,
     CountersService,
     MessagesService,
+    NzModalService,
     isUser,
     isGuest,
     UpdateUserService,

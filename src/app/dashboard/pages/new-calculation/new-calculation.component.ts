@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { MessagesService } from '../../../shared/services/messages.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-new-calculation',
@@ -148,9 +149,7 @@ export class NewCalculationComponent implements OnInit {
 
   saveCalculation(uid: string, month: string) {
     let date = this.datePipe.transform(month, 'MM-yyyy');
-    let ref = `${this.userRef}/${uid}/calculations/${date}`;
-    let index;
-
+    let ref = `${this.userRef}/${uid}/calculations/`;
     let other = {
       'date': date,
       'additional': this.checkboxValue,
@@ -160,10 +159,21 @@ export class NewCalculationComponent implements OnInit {
 
     this._TOTAL.push(other);
 
+    firebase.database().ref(ref).child(date).once('value', snapshot => {
+      if (snapshot.exists()) {
+        console.log('Value already exist')
+      } else {
+        this.updateCalculation(ref, date)
+      }
+    });
+  }
+
+  private updateCalculation(ref: string, date: string): void {
+    let index;
     let promises = [];
 
     for (index = 0; index < this._TOTAL.length; ++index) {
-      let promise = this.db.object(ref).update(this._TOTAL[index]);
+      let promise = this.db.object(`${ref}${date}`).update(this._TOTAL[index]);
       promises.push(promise);
     }
 

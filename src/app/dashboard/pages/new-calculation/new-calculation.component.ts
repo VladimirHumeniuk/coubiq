@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { MessagesService } from '../../../shared/services/messages.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { NzModalService } from 'ng-zorro-antd';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -40,7 +41,8 @@ export class NewCalculationComponent implements OnInit {
     private datePipe: DatePipe,
     public messagesService: MessagesService,
     private router: Router,
-    private _location: Location
+    private _location: Location,
+    private modal: NzModalService
   ) {
     this.countersService.getCounters.subscribe((value) => {
       if (value && Object.keys(value).length !== 0) {
@@ -112,7 +114,6 @@ export class NewCalculationComponent implements OnInit {
       Object.keys(this.meters.controls).forEach(key => {
         if (this.counters.withCounter && key != 'comment') {
           this.countMeters(res, key)
-
         } else if (key != 'heating' && key != 'comment') {
           this.countMeters(res, key)
         }
@@ -162,6 +163,14 @@ export class NewCalculationComponent implements OnInit {
     firebase.database().ref(ref).child(date).once('value', snapshot => {
       if (snapshot.exists()) {
         console.log('Value already exist')
+        this.modal.confirm({
+          nzTitle: `Розрахунок за ${date} вже існує.`,
+          nzContent: 'Перезаписати дані?',
+          nzOkText: 'Так',
+          nzCancelText: 'Ні',
+          nzOkType: 'danger',
+          nzOnOk: () => this.updateCalculation(ref, date),
+        })
       } else {
         this.updateCalculation(ref, date)
       }

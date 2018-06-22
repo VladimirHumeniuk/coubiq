@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
     public authService: AuthService
   ) { }
 
-  initForm() {
+  private initForm(): void {
     this.authentication = this.fb.group({
       email: ['', [
         Validators.required,
@@ -34,7 +34,7 @@ export class SignInComponent implements OnInit {
     })
   }
 
-  login(form: string) {
+  public login(form): void {
     for (const i in this.authentication.controls) {
       this.authentication.controls[i].markAsDirty();
       this.authentication.controls[i].updateValueAndValidity();

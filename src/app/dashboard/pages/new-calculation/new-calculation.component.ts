@@ -137,7 +137,7 @@ export class NewCalculationComponent implements OnInit {
     });
   }
 
-  private countAdditional(checkbox: string): void {
+  public countAdditional(checkbox: string): void {
     this[checkbox] ? this.checkboxValue += this.counters[checkbox] : this.checkboxValue -= this.counters[checkbox];
   }
 
@@ -145,7 +145,7 @@ export class NewCalculationComponent implements OnInit {
     return Math.round((this.inputsValue + this.checkboxValue) * 1e2) / 1e2
   }
 
-  public saveCalculation(uid: string, month: string): void {
+  public saveCalculation(uid: string, month: object): void {
     let date = this.datePipe.transform(month, 'MM-yyyy');
     let ref = `${this.userRef}/${uid}/calculations/`;
     let other = {

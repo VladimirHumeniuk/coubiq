@@ -15,8 +15,8 @@ import { EqualValidator } from '../../../shared/directives/validate-equal.direct
 })
 export class SettingsComponent implements OnInit {
 
-  private nameMinLength: number = 4;
-  private nameMaxLength: number = 36;
+  public nameMinLength: number = 4;
+  public nameMaxLength: number = 36;
   private passMinLength: number = 6;
   private passMaxLength: number = 30;
 

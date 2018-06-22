@@ -21,7 +21,7 @@ export class RegistrationService {
     private router: Router
   ) { }
 
-  writeUser(uid: string, user: User) {
+  public writeUser(uid: string, user: User): void {
     firebase.auth().currentUser.updateProfile({
       displayName: user.username,
       photoURL: ''
@@ -34,9 +34,9 @@ export class RegistrationService {
         city: user.city
       })
     }))
-  };
+  }
 
-  createUser(user: User, password: string) {
+  public createUser(user: User, password: string): void {
     this.authFb.auth.createUserWithEmailAndPassword(user.email, password)
       .then((user$) => {
         this.user = user$;
@@ -46,9 +46,9 @@ export class RegistrationService {
         this.router.navigate(['/']);
       })
       .catch(error => console.log(error))
-  };
+  }
 
-  onSubmit(form, country, city) {
+  public onSubmit(form: any, country: string, city: string): void {
     let formData = Object.assign({});
     formData = Object.assign(formData, form.value);
 

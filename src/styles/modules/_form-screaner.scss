@@ -23,6 +23,7 @@
   top: 0;
   right: 0;
   margin: 38px 38px 48px;
+  z-index: 1;
 
   @media (max-width: $sm) {
     margin-right: 5%;
@@ -49,6 +50,7 @@
 .form-screaner__logo {
   position: absolute;
   margin: 30px 38px;
+  z-index: 1;
 
   @media (max-width: $sm) {
     margin-left: 5%;

@@ -1,3 +1,5 @@
+@import "../../../../styles/variables/variables";
+
 $bg-color: #fff;
 $dot-color: #cecece;
 
@@ -10,12 +12,21 @@ $dot-space: 22px;
     linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
     linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
   background-size: $dot-space $dot-space;
-  padding: 40px 40px 80px;
+  padding: 15px 15px 20px;
+
+  @media (min-width: $lg) {
+    padding: 40px 40px 80px;
+  }
 }
 
 .home-header {
-  padding-top: 60px;
-  margin-bottom: 90px;
+  padding-top: 0;
+  margin-bottom: 20px;
+
+  @media (min-width: $lg) {
+    margin-bottom: 90px;
+    padding-top: 60px;
+  }
 }
 
 .home-box {
@@ -33,14 +44,22 @@ $dot-space: 22px;
   }
 
   &--title {
-    padding: 110px 50px 30px;
+    padding: 90px 20px 10px;
+
+    @media (min-width: $lg) {
+      padding: 110px 50px 30px;
+    }
   }
 
   &--subtitle {
     font-size: 17px;
-    padding: 40px 50px;
+    padding: 30px 20px;
     border: 1px solid #f7f7f7;
     border-top: 0;
+
+    @media (min-width: $lg) {
+      padding: 40px 50px;
+    }
   }
 }
 
@@ -54,29 +73,38 @@ $dot-space: 22px;
 }
 
 .home-image {
+  display: none;
   position: relative;
-  margin-top: 40px;
-  height: 480px;
 
-  &::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: -40px;
+  @media (min-width: $lg) {
     display: block;
-    width: calc(100% - 40px);
-    height: 100%;
-    background-color: var(--c-primary);
-    z-index: 5;
+    height: 480px;
+    margin-top: 40px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: -40px;
+      display: block;
+      width: calc(100% - 40px);
+      height: 100%;
+      background-color: var(--c-primary);
+      z-index: 5;
+    }
   }
 }
 
 .home-image__image {
   position: relative;
   background-image: url(/assets/images/bg_home.jpg);
-  width: calc(100% - 40px);
+  background-size: cover;
   height: 100%;
   z-index: 10;
+
+  @media (min-width: $lg) {
+    width: calc(100% - 40px);
+  }
 }
 
 .feature-item {
@@ -87,10 +115,15 @@ $dot-space: 22px;
   color: #fff;
   font-size: 17px;
   padding-left: 24px;
+  margin-bottom: 15px;
 
   i {
     font-size: 21px;
     margin-right: 20px;
+  }
+
+  @media (min-width: $lg) {
+    margin-bottom: 0;
   }
 }
 

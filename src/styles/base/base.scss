@@ -28,9 +28,14 @@ body {
 .ant-layout-header {
   background-color: #fff;
   color: #4d4d4d;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
   border-bottom: 1px solid var(--c-light-gray);
+
+  @media (min-width: $xl) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 .ant-layout-footer {

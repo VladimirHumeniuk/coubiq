@@ -17,6 +17,8 @@ export class CountersComponent implements OnInit {
   protected userRef: string = 'users';
   public counters: FormGroup;
 
+  public saveLoader: boolean = false;
+
   constructor(
     private db: AngularFireDatabase,
     private fb: FormBuilder,
@@ -76,8 +78,14 @@ export class CountersComponent implements OnInit {
       other: 1
     };
 
+    this.saveLoader = true;
+
     this.db.object(`${this.userRef}/${uid}/counters`).update(counters)
-      .then(() => this.messagesService.createMessage('success', 'Нові дані успішно збережені.'))
+      .then(() => {
+        this.messagesService.createMessage('success', 'Нові дані успішно збережені.');
+        this.saveLoader = false;
+        form.markAsPristine();
+      })
       .catch(error => this.messagesService.createMessage('error', 'Виникла помилка при збереженні. Спробуйте пізніше.'))
   }
 

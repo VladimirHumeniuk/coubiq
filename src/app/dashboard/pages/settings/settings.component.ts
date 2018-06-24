@@ -17,8 +17,8 @@ export class SettingsComponent implements OnInit {
 
   public nameMinLength: number = 4;
   public nameMaxLength: number = 36;
-  private passMinLength: number = 6;
-  private passMaxLength: number = 30;
+  public passMinLength: number = 6;
+  public passMaxLength: number = 30;
 
   public passwordNotEqual: string = 'Паролі не співпадають.';
   public noCitySelected: string = 'Оберіть місто.';
@@ -60,7 +60,8 @@ export class SettingsComponent implements OnInit {
     uid: string,
     username: string,
     country: string,
-    city: string
+    city: string,
+    form: any
   ): void {
 
     const user: User = {
@@ -69,7 +70,9 @@ export class SettingsComponent implements OnInit {
       city: city
     };
 
-    this.updateUser.updateUserData(uid, user)
+    form.form.markAsPristine();
+
+    this.updateUser.updateUserData(uid, user);
   }
 
   public isControlInvalid(controlName: string): boolean {

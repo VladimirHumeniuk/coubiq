@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     let top = el.offsetTop;
     let height = el.offsetHeight;
 
-    const visible = top < (window.pageYOffset + window.innerHeight ) && (top + height - 100) > window.pageYOffset;
+    const visible = top < (window.pageYOffset + window.innerHeight ) && (top + height + 300) > window.pageYOffset;
 
     if (visible) {
       el.classList.add('opened');
@@ -33,13 +33,13 @@ export class HomeComponent implements OnInit {
   private laptopSetup(): void {
     let el = document.getElementById("laptop");
 
-    el.classList.add('loaded');
 
     function setup() {
+      el.classList.add('loaded');
       el.classList.add('opened')
     }
 
-    setTimeout(setup, 500);
+    setTimeout(setup, 10);
   }
 
   ngOnInit() {

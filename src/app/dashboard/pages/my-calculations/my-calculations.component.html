@@ -16,4 +16,21 @@
 
 <nz-divider></nz-divider>
 
-<app-calculations-table></app-calculations-table>
+<nav class="table-nav">
+    <a
+    nz-button
+    nzType="primary"
+    nzShape="circle"
+    nz-popconfirm
+    [nzTitle]="checkedRows.length > 1 ? 'Видалити обрані розрахунки?' : 'Видалити обраний розрахунок?'"
+    (nzOnConfirm)="removeCalculation(checkedRows)"
+    [nzOkText]="'Так'">
+      <i class="anticon anticon-delete"></i>
+    </a>
+
+    <a (click)="exportToExel(checkedRows)">
+      <i class="anticon anticon-upload"></i>
+    </a>
+</nav>
+
+<app-calculations-table (emitChecked)="checkedRowsHandler($event)"></app-calculations-table>

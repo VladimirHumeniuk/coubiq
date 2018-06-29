@@ -50,7 +50,7 @@ export class MyCalculationsComponent implements OnInit {
       });
   }
 
-  public exportToExel(data) {
+  public exportFile(data: any[], type: string) {
     const TABLEROW: TableRow[] = [];
 
     for (let i in data) {
@@ -68,7 +68,18 @@ export class MyCalculationsComponent implements OnInit {
       )
     }
 
-    this.exportService.exportAsExcelFile(TABLEROW, 'data');
+    switch (type) {
+      case 'xls':
+        this.exportService.exportAsExcelFile(TABLEROW);
+        break;
+
+      case 'csv':
+        this.exportService.exportAsCsvFile(TABLEROW);
+        break;
+
+      default:
+        this.exportService.exportAsExcelFile(TABLEROW);
+    }
   }
 
   ngOnInit() {

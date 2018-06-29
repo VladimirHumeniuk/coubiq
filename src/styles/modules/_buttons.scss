@@ -40,3 +40,12 @@
     color: var(--c-font);
   }
 }
+
+.file-icon {
+  background-color: transparent;
+  border: 0;
+
+  img {
+    width: 25px;
+  }
+}

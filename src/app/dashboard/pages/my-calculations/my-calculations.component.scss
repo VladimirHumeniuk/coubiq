@@ -3,4 +3,10 @@
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 24px;
+
+  button {
+    ~ button {
+      margin-left: 15px;
+    }
+  }
 }

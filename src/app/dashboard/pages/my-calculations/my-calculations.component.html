@@ -17,20 +17,38 @@
 <nz-divider></nz-divider>
 
 <nav class="table-nav">
-    <a
+    <button
     nz-button
-    nzType="primary"
+    nzType="danger"
     nzShape="circle"
     nz-popconfirm
     [nzTitle]="checkedRows.length > 1 ? 'Видалити обрані розрахунки?' : 'Видалити обраний розрахунок?'"
     (nzOnConfirm)="removeCalculation(checkedRows)"
     [nzOkText]="'Так'">
       <i class="anticon anticon-delete"></i>
-    </a>
+    </button>
 
-    <a (click)="exportToExel(checkedRows)">
-      <i class="anticon anticon-upload"></i>
-    </a>
+    <button
+    nz-button
+    nzType="primary"
+    nzShape="circle">
+      <i class="anticon anticon-printer"></i>
+    </button>
+
+    <button
+    nz-button
+    nzType="primary"
+    nzShape="circle">
+      <i class="anticon anticon-download"></i>
+    </button>
+
+    <button (click)="exportFile(checkedRows, 'xls')" class="file-icon">
+      <img src="/assets/icons/ECEL.svg" alt="">
+    </button>
+
+    <button (click)="exportFile(checkedRows, 'csv')" class="file-icon">
+      <img src="/assets/icons/CSV.svg" alt="">
+    </button>
 </nav>
 
 <app-calculations-table (emitChecked)="checkedRowsHandler($event)"></app-calculations-table>

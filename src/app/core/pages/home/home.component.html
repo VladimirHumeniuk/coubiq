@@ -4,62 +4,34 @@
   </nz-header>
 
   <nz-layout>
-    <nz-content class="pattern-bg">
+    <div class="hero">
+      <section class="hero__headings">
+        <h1 class="hero__title">
+          <b>Калькулятор</b> вартості<br/>комунальних послуг
+        </h1>
 
-      <main nz-row nzGutter="16" class="home-header">
-        <div nz-col class="gutter-row" nzSpan="24" nzLg="12">
-          <div class="home-box home-box--primary home-box--title">
-            <h1 class="home-heading">
-              Калькулятор
-              <span class="home-subheading">комунальних платежів</span>
-            </h1>
-          </div>
-
-          <div class="home-box home-box--subtitle">
-            <p>
-              З радістю допоможемо зібрати та порахувати вартість ваших комунальних послуг, але сплатити доведеться вам.
-            </p>
-            <a
-            routerLink="/sign-up"
-            nz-button
-            nzSize="large"
-            nzType="primary">
-              Зареєструватися
-            </a>
-          </div>
-        </div>
-
-        <div nz-col class="gutter-row" nzSpan="24" nzLg="12">
-          <div class="home-image">
-            <div class="home-image__image"></div>
-          </div>
-        </div>
-      </main>
-
-      <section nz-row nzGutter="16" class="features">
-        <div nz-col class="gutter-row" nzSpan="24" nzLg="8">
-          <div class="feature-item">
-            <i class="anticon anticon-calculator"></i>
-            <h2 class="feature-item__title">Розрахунок вартості</h2>
-          </div>
-        </div>
-
-        <div nz-col class="gutter-row" nzSpan="24" nzLg="8">
-          <div class="feature-item">
-            <i class="anticon anticon-table"></i>
-            <h2 class="feature-item__title">Історія підрахунків</h2>
-          </div>
-        </div>
-
-        <div nz-col class="gutter-row" nzSpan="24" nzLg="8">
-          <div class="feature-item">
-            <i class="anticon anticon-line-chart"></i>
-            <h2 class="feature-item__title">Порівняння витрат</h2>
+        <h2 class="hero__subtitle">
+          Розрахунок витрат та порівняння розходів на електроенергію,<br/>водопостачання, газ, опалення та інші комунальні послуги.
+        </h2>
+      </section>
+      <section class="laptop">
+        <div class="laptop__wrapper">
+          <div id="laptop" class="laptop__mockup"
+          (scroll)="isVisible()">
+            <div class="laptop__part laptop__part--top">
+              <img src="/assets/images/laptop-top.svg" alt="" class="top">
+              <img src="/assets/images/laptop-cover.svg" alt="" class="cover">
+              <img src="/assets/images/laptop-content.png" class="content" alt="">
+            </div>
+            <div class="laptop__part laptop__part--bottom">
+              <img src="/assets/images/laptop-cover.svg" alt="" class="cover">
+              <img src="/assets/images/laptop-bottom.svg" alt="" class="bottom">
+            </div>
           </div>
         </div>
       </section>
 
-    </nz-content>
+    </div>
   </nz-layout>
 </nz-layout>
 

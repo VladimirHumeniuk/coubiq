@@ -16,4 +16,53 @@
 
 <nz-divider></nz-divider>
 
-<app-calculations-table></app-calculations-table>
+<nav class="table-nav">
+    <button
+    nz-button
+    nzType="danger"
+    nzShape="circle"
+    nz-popconfirm
+    nzGhost
+    [ngClass]="checkedRows.length == 0 ? 'hidden' : ''"
+    [nzTitle]="checkedRows.length > 1 ? 'Видалити обрані розрахунки?' : 'Видалити обраний розрахунок?'"
+    (nzOnConfirm)="removeCalculation(checkedRows)"
+    [nzOkText]="'Так'"
+    class="table-nav__item">
+      <i class="anticon anticon-delete"></i>
+    </button>
+
+    <nz-dropdown
+    [nzPlacement]="'bottomCenter'"
+    class="table-nav__item">
+      <button
+      nz-button
+      nz-dropdown
+      nzType="primary"
+      nzShape="circle">
+        <i class="anticon anticon-download"></i>
+      </button>
+
+      <ul nz-menu>
+        <li nz-menu-item>
+          <button (click)="exportFile(checkedRows, 'xls')" class="file-icon">
+            <img src="/assets/icons/ECEL.svg" alt=""> Імпорт в XLS
+          </button>
+        </li>
+        <li nz-menu-item>
+          <button (click)="exportFile(checkedRows, 'csv')" class="file-icon">
+            <img src="/assets/icons/CSV.svg" alt=""> Імпорт в CSV
+          </button>
+        </li>
+      </ul>
+    </nz-dropdown>
+
+    <button
+    nz-button
+    nzType="primary"
+    nzShape="circle"
+    class="table-nav__item">
+      <i class="anticon anticon-printer"></i>
+    </button>
+</nav>
+
+<app-calculations-table (emitChecked)="checkedRowsHandler($event)" (emitTableData)="tableDataHandler($event)"></app-calculations-table>

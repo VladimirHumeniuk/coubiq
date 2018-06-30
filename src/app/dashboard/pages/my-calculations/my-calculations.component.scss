@@ -1,0 +1,20 @@
+.table-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 24px;
+
+  &__item ~ &__item {
+    margin-left: 15px;
+  }
+
+  &__item {
+    transition: opacity .3s;
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+}

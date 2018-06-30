@@ -1,11 +1,21 @@
 <nz-table
 #calculationsTable
 [nzNoResult]="'Данні відсутні'"
-[nzData]="calculationService.calculations"
-[nzLoading]="!calculationService.calcLoaded">
+[nzData]="displayData"
+(nzCurrentPageDataChange)="currentPageDataChange($event)"
+[nzLoading]="!calcLoaded"
+(nzPageIndexChange)="refreshStatus()"
+(nzPageSizeChange)="refreshStatus()">
   <thead>
     <tr>
-      <th nzShowExpand></th>
+      <ng-container *ngIf="displayData.length > 0">
+        <th
+        nzShowCheckbox
+        [(nzChecked)]="allChecked"
+        [nzIndeterminate]="indeterminate"
+        (nzCheckedChange)="checkAll($event)"></th>
+        <th nzShowExpand></th>
+      </ng-container>
       <th>Місяць</th>
       <th><span nzTitle="Електроенергія" nz-tooltip>Ел.-нергія</span></th>
       <th>Газ</th>
@@ -15,13 +25,13 @@
       <th class="no-wrap">Додатково <i nzTitle="Інтернет, Телефон, ЖКП" nz-tooltip class="anticon anticon-question-circle-o"></i></th>
       <th>Інше</th>
       <th>Разом</th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <ng-container *ngFor="let data of calculationsTable.data">
       <tr>
+        <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus($event)"></td>
         <ng-container *ngIf="data.value.comment">
           <td nzShowExpand [(nzExpand)]="data.expand"></td>
         </ng-container>
@@ -37,14 +47,6 @@
         <td>{{ data.value.additional }} грн.</td>
         <td>{{ data.value.other.cost }} грн.</td>
         <td>{{ data.value.total }} грн.</td>
-        <td>
-          <a
-          nz-popconfirm nzTitle="Впевнені, що хочете видалити розрахунок за {{data.key}}?"
-          (nzOnConfirm)="removeCalculation(data.key)"
-          [nzOkText]="'Так'">
-            <i class="anticon anticon-delete"></i>
-          </a>
-        </td>
       </tr>
       <tr [nzExpand]="data.expand" *ngIf="data.value.comment">
         <td></td>

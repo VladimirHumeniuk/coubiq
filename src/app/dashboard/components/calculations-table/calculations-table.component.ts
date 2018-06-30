@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../../../shared/services/auth.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CalculationsService } from './../../services/calculations.service';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { MessagesService } from '../../../shared/services/messages.service';
 
 @Component({
   selector: 'app-calculations-table',
@@ -10,23 +7,55 @@ import { MessagesService } from '../../../shared/services/messages.service';
   styleUrls: ['./calculations-table.component.scss']
 })
 export class CalculationsTableComponent implements OnInit {
+  @Output() emitChecked: EventEmitter<any[]> = new EventEmitter();
+  @Output() emitTableData: EventEmitter<any[]> = new EventEmitter();
+
+  public allChecked = false;
+  public indeterminate = false;
+  public dataSet: any = [];
+  public displayData: any = [];
+  public checkedArr: any = [];
+
+  public calcLoaded: boolean = false;
 
   constructor(
-    public calculationService: CalculationsService,
-    private db: AngularFireDatabase,
-    private authService: AuthService,
-    private messagesService: MessagesService
-  ) {  }
+    public calculationService: CalculationsService
+  ) {
+    this.dataSet = this.calculationService.getCalculations;
 
-  public removeCalculation(key: string, uid: string = this.authService.currentUser.uid): void {
-    this.db.list(`users/${uid}/calculations/`).remove(key)
-      .then(() => this.messagesService.createMessage('success', `Розрахунок за ${key} видалено`))
-      .catch(error => {
-        console.log(error);
-        this.messagesService.createMessage('error', 'Виникла помилка, спробуйте пізніше.')
-      });
+    this.dataSet.subscribe(res => {
+      if(res) {
+        this.displayData = Object.keys(res).map(key => {
+          return { key: key, value: res[key] }
+        });
+        this.emitTableData.emit(this.displayData);
+        this.calcLoaded = true;
+      } else {
+        this.calcLoaded = true;
+      }
+    })
   }
 
-  ngOnInit() { }
+  public checkAll(value: boolean): void {
+    this.dataSet.forEach(data => data.checked = value);
+    this.refreshStatus();
+  }
+
+  public currentPageDataChange($event: any): void {
+    this.dataSet = $event;
+  }
+
+  public refreshStatus(): void {
+    const allChecked = this.dataSet.every(value => value.checked === true);
+    const allUnChecked = this.dataSet.every(value => !value.checked);
+    this.allChecked = allChecked;
+    this.indeterminate = (!allChecked) && (!allUnChecked);
+    this.checkedArr = this.displayData.filter(value => value.checked);
+
+    this.emitChecked.emit(this.displayData.filter(value => value.checked));
+  }
+
+  ngOnInit() {
+  }
 
 }

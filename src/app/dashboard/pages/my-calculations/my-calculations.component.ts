@@ -51,34 +51,34 @@ export class MyCalculationsComponent implements OnInit {
   }
 
   public exportFile(data: any[], type: string) {
-    const TABLEROW: TableRow[] = [];
+    let tableRow = [];
 
     for (let i in data) {
-      TABLEROW.push(
+      tableRow.push(
         {
           'Місяць': data[i].key,
           'Електроенергія': data[i].value.electricity.cost,
           'Газ': data[i].value.gas.cost,
           'Холодне водопостачання та водовідведення': data[i].value.coldWater.cost,
           'Гаряче водопостачання': data[i].value.hotWater.cost,
-          'Телефон, інтернет, ЖКП': data[i].value.additional,
+          'Телефон; Інтернет; ЖКП': data[i].value.additional,
           'Інше': data[i].value.other.cost,
           'УСЬОГО': data[i].value.total
-        }
+        },
       )
     }
 
     switch (type) {
       case 'xls':
-        this.exportService.exportAsExcelFile(TABLEROW);
+        this.exportService.exportAsExcelFile(tableRow);
         break;
 
       case 'csv':
-        this.exportService.exportAsCsvFile(TABLEROW);
+        this.exportService.exportAsCsvFile(tableRow);
         break;
 
       default:
-        this.exportService.exportAsExcelFile(TABLEROW);
+        this.exportService.exportAsExcelFile(tableRow);
     }
   }
 

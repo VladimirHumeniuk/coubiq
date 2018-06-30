@@ -28,8 +28,6 @@ export class ExportService {
   }
 
   public exportAsCsvFile(json: any[]): void {
-    new Angular2Csv(json, 'coubiq_' + new Date().getTime(), {
-      headers: Object.keys(json[0])
-    })
+    new Angular2Csv(json, 'coubiq_' + new Date().getTime(), { headers: Object.keys(json[0]) })
   }
 }

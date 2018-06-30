@@ -13,7 +13,6 @@ export class CalculationsService {
   public calculations = [];
 
   public currentCalctulations = null;
-  public calcLoaded: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -27,10 +26,6 @@ export class CalculationsService {
         this.calculations = Object.keys(res).map(key => {
           return { key: key, value: res[key] }
         });
-
-        this.calcLoaded = true;
-      } else {
-        this.calcLoaded = true;
       }
     })
   }

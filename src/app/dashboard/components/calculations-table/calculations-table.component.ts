@@ -8,28 +8,46 @@ import { CalculationsService } from './../../services/calculations.service';
 })
 export class CalculationsTableComponent implements OnInit {
   @Output() emitChecked: EventEmitter<any[]> = new EventEmitter();
+  @Output() emitTableData: EventEmitter<any[]> = new EventEmitter();
 
   public allChecked = false;
   public indeterminate = false;
+  public dataSet: any = [];
   public displayData: any = [];
   public checkedArr: any = [];
 
+  public calcLoaded: boolean = false;
+
   constructor(
     public calculationService: CalculationsService
-  ) { }
+  ) {
+    this.dataSet = this.calculationService.getCalculations;
+
+    this.dataSet.subscribe(res => {
+      if(res) {
+        this.displayData = Object.keys(res).map(key => {
+          return { key: key, value: res[key] }
+        });
+        this.emitTableData.emit(this.displayData);
+        this.calcLoaded = true;
+      } else {
+        this.calcLoaded = true;
+      }
+    })
+  }
 
   public checkAll(value: boolean): void {
-    this.displayData.forEach(data => data.checked = value);
+    this.dataSet.forEach(data => data.checked = value);
     this.refreshStatus();
   }
 
   public currentPageDataChange($event: any): void {
-    this.displayData = $event;
+    this.dataSet = $event;
   }
 
   public refreshStatus(): void {
-    const allChecked = this.displayData.every(value => value.checked === true);
-    const allUnChecked = this.displayData.every(value => !value.checked);
+    const allChecked = this.dataSet.every(value => value.checked === true);
+    const allUnChecked = this.dataSet.every(value => !value.checked);
     this.allChecked = allChecked;
     this.indeterminate = (!allChecked) && (!allUnChecked);
     this.checkedArr = this.displayData.filter(value => value.checked);

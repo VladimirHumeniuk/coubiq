@@ -1,13 +1,21 @@
 <nz-table
 #calculationsTable
 [nzNoResult]="'Данні відсутні'"
-[nzData]="calculationService.calculations"
+[nzData]="displayData"
 (nzCurrentPageDataChange)="currentPageDataChange($event)"
-[nzLoading]="!calculationService.calcLoaded">
+[nzLoading]="!calcLoaded"
+(nzPageIndexChange)="refreshStatus()"
+(nzPageSizeChange)="refreshStatus()">
   <thead>
     <tr>
-      <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
-      <th nzShowExpand></th>
+      <ng-container *ngIf="displayData.length > 0">
+        <th
+        nzShowCheckbox
+        [(nzChecked)]="allChecked"
+        [nzIndeterminate]="indeterminate"
+        (nzCheckedChange)="checkAll($event)"></th>
+        <th nzShowExpand></th>
+      </ng-container>
       <th>Місяць</th>
       <th><span nzTitle="Електроенергія" nz-tooltip>Ел.-нергія</span></th>
       <th>Газ</th>

@@ -1,19 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MessagesService } from '../../../shared/services/messages.service';
 import { ExportService } from '../../services/export.service';
-
-export class TableRow {
-  'Місяць': String;
-  'Електроенергія': number;
-  'Газ': number;
-  'Холодне водопостачання та водовідведення': number;
-  'Гаряче водопостачання': number;
-  'Телефон, інтернет, ЖКП': number;
-  'Інше': number;
-  'УСЬОГО': number;
-}
+import { TableRow } from '../../models/tablerow';
 
 @Component({
   selector: 'app-my-calculations',
@@ -22,6 +12,7 @@ export class TableRow {
 })
 export class MyCalculationsComponent implements OnInit {
   public checkedRows: any[] = [];
+  public tableData: any[] = [];
 
   constructor(
     private db: AngularFireDatabase,
@@ -30,8 +21,12 @@ export class MyCalculationsComponent implements OnInit {
     public exportService: ExportService
   ) { }
 
-  checkedRowsHandler(checkedRows: any[]) {
+  public checkedRowsHandler(checkedRows: any[]): void {
     this.checkedRows = checkedRows;
+  }
+
+  public tableDataHandler(tableData: any[]): void {
+    this.tableData = tableData;
   }
 
   public removeCalculation(rows: any, uid: string = this.authService.currentUser.uid): void {
@@ -44,28 +39,37 @@ export class MyCalculationsComponent implements OnInit {
     }
 
     Promise.all(promises)
-      .then(() => this.messagesService.createMessage('success', `Розрахун${rows.length > 1 ? 'ки' : 'ок'} видалено.`))
+      .then(() => {
+        this.checkedRows = [];
+        this.messagesService.createMessage('success', `Розрахун${rows.length > 1 ? 'ки' : 'ок'} видалено.`)
+      })
       .catch(error => {
         this.messagesService.createMessage('error', 'Виникла помилка, спробуйте пізніше.')
       });
   }
 
-  public exportFile(data: any[], type: string) {
-    let tableRow = [];
+  public exportFile(data: TableRow[], type: string) {
+    let tableRow: TableRow[] = [];
 
-    for (let i in data) {
-      tableRow.push(
-        {
-          'Місяць': data[i].key,
-          'Електроенергія': data[i].value.electricity.cost,
-          'Газ': data[i].value.gas.cost,
-          'Холодне водопостачання та водовідведення': data[i].value.coldWater.cost,
-          'Гаряче водопостачання': data[i].value.hotWater.cost,
-          'Телефон; Інтернет; ЖКП': data[i].value.additional,
-          'Інше': data[i].value.other.cost,
-          'УСЬОГО': data[i].value.total
-        },
-      )
+    function arrayFill($data) {
+      for (let i in $data) {
+        tableRow.push({
+            'Місяць': $data[i].key,
+            'Електроенергія': $data[i].value.electricity.cost,
+            'Газ': $data[i].value.gas.cost,
+            'Холодне водопостачання та водовідведення': $data[i].value.coldWater.cost,
+            'Гаряче водопостачання': $data[i].value.hotWater.cost,
+            'Телефон; Інтернет; ЖКП': $data[i].value.additional,
+            'Інше': $data[i].value.other.cost,
+            'УСЬОГО': $data[i].value.total
+          })
+      }
+    }
+
+    if (data.length > 0) {
+      arrayFill(data)
+    } else {
+      arrayFill(this.tableData)
     }
 
     switch (type) {

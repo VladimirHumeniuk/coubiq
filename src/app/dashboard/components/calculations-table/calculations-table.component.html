@@ -1,5 +1,6 @@
 <nz-table
 #calculationsTable
+class="calculations-table"
 [nzNoResult]="'Данні відсутні'"
 [nzData]="displayData"
 (nzCurrentPageDataChange)="currentPageDataChange($event)"
@@ -14,7 +15,7 @@
         [(nzChecked)]="allChecked"
         [nzIndeterminate]="indeterminate"
         (nzCheckedChange)="checkAll($event)"></th>
-        <th nzShowExpand></th>
+        <th nzShowExpand class="expand"></th>
       </ng-container>
       <th>Місяць</th>
       <th><span nzTitle="Електроенергія" nz-tooltip>Ел.-нергія</span></th>
@@ -33,12 +34,12 @@
       <tr>
         <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus($event)"></td>
         <ng-container *ngIf="data.value.comment">
-          <td nzShowExpand [(nzExpand)]="data.expand"></td>
+          <td nzShowExpand [(nzExpand)]="data.expand" class="expand"></td>
         </ng-container>
         <ng-container *ngIf="!data.value.comment">
-          <td></td>
+          <td class="expand"></td>
         </ng-container>
-        <td>{{ data.key }}</td>
+        <td>{{ data.value.date | date:'MM-yyyy' }}</td>
         <td>{{ data.value.electricity.cost }} грн.</td>
         <td>{{ data.value.gas.cost }} грн.</td>
         <td>{{ data.value.coldWater.cost }} грн.</td>
@@ -48,7 +49,7 @@
         <td>{{ data.value.other.cost }} грн.</td>
         <td>{{ data.value.total }} грн.</td>
       </tr>
-      <tr [nzExpand]="data.expand" *ngIf="data.value.comment">
+      <tr [nzExpand]="data.expand" *ngIf="data.value.comment" class="expand">
         <td></td>
         <td colspan="10">{{ data.value.comment }}</td>
       </tr>

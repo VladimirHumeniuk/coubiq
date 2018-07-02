@@ -149,7 +149,7 @@ export class NewCalculationComponent implements OnInit {
     let date = this.datePipe.transform(month, 'MM-yyyy');
     let ref = `${this.userRef}/${uid}/calculations/`;
     let other = {
-      'date': date,
+      'date': month,
       'additional': this.checkboxValue,
       'comment': this.meters.get('comment').value,
       'total': this.countTotal

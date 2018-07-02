@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CalculationsService } from './../../services/calculations.service';
+import arraySort from 'array-sort'
 
 @Component({
   selector: 'app-calculations-table',
@@ -25,9 +26,10 @@ export class CalculationsTableComponent implements OnInit {
 
     this.dataSet.subscribe(res => {
       if(res) {
-        this.displayData = Object.keys(res).map(key => {
+        this.displayData = arraySort(Object.keys(res).map(key => {
           return { key: key, value: res[key] }
-        });
+        }), 'value.date', {reverse: true});
+
         this.emitTableData.emit(this.displayData);
         this.calcLoaded = true;
       } else {

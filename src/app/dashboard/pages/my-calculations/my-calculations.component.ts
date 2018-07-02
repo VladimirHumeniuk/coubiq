@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MessagesService } from '../../../shared/services/messages.service';
@@ -84,6 +84,10 @@ export class MyCalculationsComponent implements OnInit {
       default:
         this.exportService.exportAsExcelFile(tableRow);
     }
+  }
+
+  public printTable(): void {
+    window.print();
   }
 
   ngOnInit() {

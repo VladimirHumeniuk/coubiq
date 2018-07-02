@@ -1,7 +1,3 @@
-import { CalculationsService } from './services/calculations.service';
-import { SharedModule } from './../shared/shared.module';
-import { CountersService } from './services/counters.service';
-import { AuthService } from './../shared/services/auth.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +29,10 @@ import { MyCalculationsComponent } from './pages/my-calculations/my-calculations
 import { CalculationsTableComponent } from './components/calculations-table/calculations-table.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { NewCalculationComponent } from './pages/new-calculation/new-calculation.component';
+import { CalculationsService } from './services/calculations.service';
+import { SharedModule } from './../shared/shared.module';
+import { CountersService } from './services/counters.service';
+import { AuthService } from './../shared/services/auth.service';
 
 @NgModule({
   declarations: [

@@ -16,6 +16,8 @@
 
 <nz-divider></nz-divider>
 
+{{ print }}
+
 <nav class="table-nav">
     <button
     nz-button
@@ -60,6 +62,7 @@
     nz-button
     nzType="primary"
     nzShape="circle"
+    (click)="printTable()"
     class="table-nav__item">
       <i class="anticon anticon-printer"></i>
     </button>

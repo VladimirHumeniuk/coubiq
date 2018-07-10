@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../../shared/services/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
@@ -11,11 +10,9 @@ import { User } from '../../shared/interfaces/user';
 export class CalculationsService {
 
   public calculations = [];
-
   public currentCalctulations = null;
 
   constructor(
-    public authService: AuthService,
     private authFb: AngularFireAuth,
     private db: AngularFireDatabase
   ) {

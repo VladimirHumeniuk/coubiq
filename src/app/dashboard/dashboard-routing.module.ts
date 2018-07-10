@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { MyCalculationsComponent } from './pages/my-calculations/my-calculations.component';
 import { NewCalculationComponent } from './pages/new-calculation/new-calculation.component';
 import { CountersGuard } from './guards/counters.guard';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,14 @@ const routes: Routes = [
       path: "new",
       component: NewCalculationComponent,
       canActivate: [CountersGuard]
+    }]
+  },
+  {
+    path: "statistics",
+    component: DashboardComponent,
+    children: [{
+      path: "",
+      component: StatisticsComponent
     }]
   },
 ];

@@ -1,0 +1,13 @@
+<h1>Порівняння витрат</h1>
+<p>Детальне порівняння споживання комунальних послуг.</p>
+
+<nz-divider></nz-divider>
+
+<div style="display: block;" *ngIf="monthes.length > 0">
+  <canvas baseChart width="400" height="200"
+              [datasets]="electricity"
+              [labels]="monthes"
+              [options]="lineChartOptions"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"></canvas>
+  </div>

@@ -33,6 +33,8 @@ import { CalculationsService } from './services/calculations.service';
 import { SharedModule } from './../shared/shared.module';
 import { CountersService } from './services/counters.service';
 import { AuthService } from './../shared/services/auth.service';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { AuthService } from './../shared/services/auth.service';
     CountersComponent,
     MyCalculationsComponent,
     CalculationsTableComponent,
-    NewCalculationComponent
+    NewCalculationComponent,
+    StatisticsComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +58,8 @@ import { AuthService } from './../shared/services/auth.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    SharedModule
+    SharedModule,
+    ChartsModule
   ],
   providers: [
     AuthService,

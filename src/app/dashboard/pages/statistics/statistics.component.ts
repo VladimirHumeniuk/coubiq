@@ -15,6 +15,17 @@ export class StatisticsComponent implements OnInit {
 
   public monthes: Array<any> = [];
 
+  public lineChartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(230, 247, 255, 0.4)',
+      borderColor: '#1890ff',
+      pointBackgroundColor: '#fff',
+      pointBorderColor: '#3f85f5',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ]
+
   public electricity: Array<ChartData> = [new ChartData([], 'Електроенергія')];
   public coldWater: Array<ChartData> = [new ChartData([], 'Холодне водопостачання та водовідведення')];
   public hotWater: Array<ChartData> = [new ChartData([], 'Гаряче водопостачання')];
@@ -22,11 +33,23 @@ export class StatisticsComponent implements OnInit {
   public heating: Array<ChartData> = [new ChartData([], 'Опалення')];
   public total: Array<ChartData> = [new ChartData([], 'Загальні витрати')];
 
+  public activeData: string = 'electricity';
+  public graphData = this.electricity;
+
   public lineChartOptions: any = {
-    responsive: true
+    responsive: true,
+    tooltips: {
+      enabled: true,
+      mode: 'x-axis',
+      callbacks: {
+          label: (tooltipItems) => {
+              return tooltipItems.yLabel + ' грн.';
+          }
+      }
+    }
   };
 
-  public lineChartLegend: boolean = true;
+  public lineChartLegend: boolean = false;
   public lineChartType: string = 'line';
 
   constructor(
@@ -42,13 +65,21 @@ export class StatisticsComponent implements OnInit {
 
         this.chartData.forEach(i => {
           this.monthes.push(i.key);
-        });
 
-        this.chartData.forEach(i => {
-          this.electricity[0].data.push(i.value.electricity.cost)
+          this.electricity[0].data.push(i.value.electricity.cost);
+          this.coldWater[0].data.push(i.value.coldWater.cost);
+          this.hotWater[0].data.push(i.value.hotWater.cost);
+          this.gas[0].data.push(i.value.gas.cost);
+          this.heating[0].data.push(i.value.heating.cost);
+          this.total[0].data.push(i.value.total);
         });
       }
     })
+  }
+
+  public changeData(data: string): void {
+
+    this.graphData = this[data];
   }
 
   ngOnInit() {

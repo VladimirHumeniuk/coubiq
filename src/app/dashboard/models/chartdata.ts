@@ -8,9 +8,9 @@ export class ChartData {
   }
 
   chartData() {
-    return [{
+    return {
       data: this.data,
       label: this.label
-    }]
+    }
   }
 }

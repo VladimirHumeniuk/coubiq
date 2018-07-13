@@ -3,11 +3,24 @@
 
 <nz-divider></nz-divider>
 
+<nav class="nav-graph">
+  <nz-radio-group [(ngModel)]="activeData">
+    <label nz-radio-button nzValue="electricity" (click)="changeData('electricity')">Електроенергія</label>
+    <label nz-radio-button nzValue="coldWater" (click)="changeData('coldWater')">Холодне в-ння</label>
+    <label nz-radio-button nzValue="hotWater" (click)="changeData('hotWater')">Гаряче в-ння</label>
+    <label nz-radio-button nzValue="gas" (click)="changeData('gas')">Газ</label>
+    <label nz-radio-button nzValue="heating" (click)="changeData('heating')">Опалення</label>
+    <label nz-radio-button nzValue="total" (click)="changeData('total')">Загальні витрати</label>
+  </nz-radio-group>
+</nav>
+
 <div style="display: block;" *ngIf="monthes.length > 0">
   <canvas baseChart width="400" height="200"
-              [datasets]="electricity"
+              [datasets]="graphData"
               [labels]="monthes"
               [options]="lineChartOptions"
+              [colors]="lineChartColors"
               [legend]="lineChartLegend"
               [chartType]="lineChartType"></canvas>
   </div>
+

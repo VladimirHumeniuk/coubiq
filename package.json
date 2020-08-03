@@ -30,7 +30,7 @@
     "less": "^2.7.2",
     "ng-zorro-antd": "^1.0.0",
     "rxjs": "^6.2.1",
-    "rxjs-compat": "^6.2.1",
+    "rxjs-compat": "^6.6.2",
     "xlsx": "^0.13.1",
     "zone.js": "^0.8.26"
   },

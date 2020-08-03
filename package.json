@@ -21,7 +21,7 @@
     "@angular/platform-browser": "6.0.3",
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/router": "6.0.3",
-    "angular2-csv": "^0.2.5",
+    "angular2-csv": "^0.2.9",
     "angularfire2": "^5.0.0-rc.5-next",
     "array-sort": "^1.0.0",
     "core-js": "^2.5.7",

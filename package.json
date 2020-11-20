@@ -25,7 +25,7 @@
     "angularfire2": "^5.0.0-rc.5-next",
     "array-sort": "^1.0.0",
     "core-js": "^2.5.7",
-    "file-saver": "^1.3.8",
+    "file-saver": "^2.0.5",
     "firebase": "^4.13.1",
     "less": "^2.7.2",
     "ng-zorro-antd": "^1.0.0",
